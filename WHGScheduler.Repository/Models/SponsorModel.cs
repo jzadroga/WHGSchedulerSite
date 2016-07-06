@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WHGSchedulerSite.Models
+namespace WHGScheduler.Repository.Models
 {
     public class SponsorModel
     {
