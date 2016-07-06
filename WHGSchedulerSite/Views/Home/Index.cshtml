@@ -1,6 +1,17 @@
 ﻿@model WHGSchedulerSite.ViewModels.SponsorsViewModel
 
 <div class="row">
+    <div class="col-md-12">
+        <h1 class="title text-primary">
+            Pre-book appointments with Platinum and Gold sponsors
+        </h1>
+        <p class="instructions text-muted">
+            Select a sponsor and view their schedule.  Select a time to meet with them at their booth and fill out the required information.  Once you select a meeting time you will recieve a confirmation email for your meeting.
+        </p>
+    </div>
+</div>
+
+<div class="row">
     @foreach ( var sponsor in Model.sponsorList) {
     <div class="col-md-4">
         <div class="thumbnail">
