@@ -1,13 +1,8 @@
 ﻿/*   Main Layout  */
-.jumbotron{
-    padding: 0;
-    background-color: #fff;
-}
-
 h1.title{
     margin-bottom: 20px;
 }
 
-.instructions{
+p.instructions{
     font-size: 18px;
 }
