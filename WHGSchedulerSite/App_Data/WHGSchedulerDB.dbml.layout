@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="WHGSchedulerDB">
+  <DataContextMoniker Name="/WHGSchedulerDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="4bec8088-c2bb-4174-aa23-d75c95e94f60" absoluteBounds="0.75, 0.5, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/WHGSchedulerDBDataContext/component" />
+      <nestedChildShapes>
+        <elementListCompartment Id="216c190a-5789-4d78-a11b-202aa6217489" absoluteBounds="0.76500000000000012, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ad258827-fe08-4b56-98d7-064e6160e796" absoluteBounds="3.5, 0.625, 2, 2.5401025390625">
+      <DataClassMoniker Name="/WHGSchedulerDBDataContext/sponsor" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cae6c7b5-e7a3-4494-b9b5-5958e50b04ce" absoluteBounds="3.5149999999999997, 1.085, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b01d025e-99d7-4e2e-8559-29d1193fc10e" absoluteBounds="0.75, 2.625, 2, 1.3862939453125">
+      <DataClassMoniker Name="/WHGSchedulerDBDataContext/status" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0297d40d-4604-4402-a78d-d3a14d1441a3" absoluteBounds="0.76500000000000012, 3.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 2.89505126953125); (3.5 : 2.89505126953125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WHGSchedulerDBDataContext/status/status_sponsor" />
+      <nodes>
+        <classShapeMoniker Id="b01d025e-99d7-4e2e-8559-29d1193fc10e" />
+        <classShapeMoniker Id="ad258827-fe08-4b56-98d7-064e6160e796" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 1.69399251302083); (1.75 : 2.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WHGSchedulerDBDataContext/component/component_status" />
+      <nodes>
+        <classShapeMoniker Id="4bec8088-c2bb-4174-aa23-d75c95e94f60" />
+        <classShapeMoniker Id="b01d025e-99d7-4e2e-8559-29d1193fc10e" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="92143a74-2af3-4375-a34a-0bc405d1ed3e" absoluteBounds="4.125, 4.375, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/WHGSchedulerDBDataContext/user" />
+      <nestedChildShapes>
+        <elementListCompartment Id="720e8e46-8f47-44d4-b746-988725dfd0ee" absoluteBounds="4.14, 4.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 3.9319482421875); (4.78125 : 3.9319482421875); (4.78125 : 4.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WHGSchedulerDBDataContext/status/status_user" />
+      <nodes>
+        <classShapeMoniker Id="b01d025e-99d7-4e2e-8559-29d1193fc10e" />
+        <classShapeMoniker Id="92143a74-2af3-4375-a34a-0bc405d1ed3e" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="bd9ca03d-bf79-45dc-babf-c58b3b645190" absoluteBounds="0.875, 4.625, 2, 1.3862939453125">
+      <DataClassMoniker Name="/WHGSchedulerDBDataContext/userRole" />
+      <nestedChildShapes>
+        <elementListCompartment Id="092fb4c2-d045-4e42-aa31-92e07b329436" absoluteBounds="0.89000000000000012, 5.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.875 : 5.31814697265625); (4.125 : 5.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WHGSchedulerDBDataContext/userRole/userRole_user" />
+      <nodes>
+        <classShapeMoniker Id="bd9ca03d-bf79-45dc-babf-c58b3b645190" />
+        <classShapeMoniker Id="92143a74-2af3-4375-a34a-0bc405d1ed3e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.125 : 4.90907348632813); (2.875 : 4.90907348632813)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WHGSchedulerDBDataContext/user/user_userRole" />
+      <nodes>
+        <classShapeMoniker Id="92143a74-2af3-4375-a34a-0bc405d1ed3e" />
+        <classShapeMoniker Id="bd9ca03d-bf79-45dc-babf-c58b3b645190" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
