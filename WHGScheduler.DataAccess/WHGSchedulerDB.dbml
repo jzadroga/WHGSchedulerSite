@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WHGScheduler" Class="WHGSchedulerDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=tckgvy6y8i.database.windows.net;Initial Catalog=WHGScheduler;User ID=WHGScheduler;Connect Timeout=60" SettingsObjectName="WHGScheduler.DataAccess.Properties.Settings" SettingsPropertyName="WHGSchedulerConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.component" Member="components">
+    <Type Name="component">
+      <Column Name="componentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="componentName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="component_status" Member="status" ThisKey="componentID" OtherKey="componentID" Type="status" />
+    </Type>
+  </Table>
+  <Table Name="dbo.userRole" Member="userRoles">
+    <Type Name="userRole">
+      <Column Name="userRoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="role" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="userID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="userRole_user" Member="users" ThisKey="userRoleID" OtherKey="roleID" Type="user" />
+      <Association Name="user_userRole" Member="user" ThisKey="userID" OtherKey="userID" Type="user" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sponsor" Member="sponsors">
+    <Type Name="sponsor">
+      <Column Name="sponsorID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="logoImage" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="statusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="websiteUrl" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Association Name="status_sponsor" Member="status" ThisKey="statusID" OtherKey="statusID" Type="status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.status" Member="status">
+    <Type Name="status">
+      <Column Name="statusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="statusName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="componentID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="status_sponsor" Member="sponsors" ThisKey="statusID" OtherKey="statusID" Type="sponsor" />
+      <Association Name="status_user" Member="users" ThisKey="statusID" OtherKey="statusID" Type="user" />
+      <Association Name="component_status" Member="component" ThisKey="componentID" OtherKey="componentID" Type="component" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[user]" Member="users">
+    <Type Name="user">
+      <Column Name="userID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="firstName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="lastName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="statusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="roleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="user_userRole" Member="userRoles" ThisKey="userID" OtherKey="userID" Type="userRole" />
+      <Association Name="status_user" Member="status" ThisKey="statusID" OtherKey="statusID" Type="status" IsForeignKey="true" />
+      <Association Name="userRole_user" Member="userRole" ThisKey="roleID" OtherKey="userRoleID" Type="userRole" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WHGSchedulerSite", "WHGSchedulerSite\WHGSchedulerSite.csproj", "{CBA3861B-D25D-48FA-B232-5144A460EE1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WHGScheduler.DataAccess", "WHGScheduler.DataAccess\WHGScheduler.DataAccess.csproj", "{0EF6A059-848D-4513-9293-9AC081E4B58F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WHGScheduler.Repository", "WHGScheduler.Repository\WHGScheduler.Repository.csproj", "{805B0212-78B7-42C1-8AC0-5A2057551C64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{CBA3861B-D25D-48FA-B232-5144A460EE1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBA3861B-D25D-48FA-B232-5144A460EE1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBA3861B-D25D-48FA-B232-5144A460EE1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EF6A059-848D-4513-9293-9AC081E4B58F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EF6A059-848D-4513-9293-9AC081E4B58F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EF6A059-848D-4513-9293-9AC081E4B58F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EF6A059-848D-4513-9293-9AC081E4B58F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{805B0212-78B7-42C1-8AC0-5A2057551C64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805B0212-78B7-42C1-8AC0-5A2057551C64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805B0212-78B7-42C1-8AC0-5A2057551C64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805B0212-78B7-42C1-8AC0-5A2057551C64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

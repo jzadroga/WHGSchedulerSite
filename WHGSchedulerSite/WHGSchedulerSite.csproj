@@ -125,12 +125,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SponsorModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="App_Data\WHGSchedulerDB.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WHGSchedulerDB.dbml</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModels\SponsorsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\img\header.png" />
@@ -150,26 +147,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\WHGSchedulerDB.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>WHGSchedulerDB.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App_Data\WHGSchedulerDB.dbml.layout">
-      <DependentUpon>WHGSchedulerDB.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
