@@ -14,5 +14,12 @@ namespace WHGScheduler.DataAccess
 
             return (activeOnly) ? context.sponsors.Where(sp => sp.status.statusName == "active").ToList() : context.sponsors.ToList(); 
         }
+
+        public static sponsor Get(int id)
+        {
+            WHGSchedulerDBDataContext context = new WHGSchedulerDBDataContext();
+
+            return context.sponsors.Where(sp => sp.sponsorID == id).FirstOrDefault();
+        }
     }
 }

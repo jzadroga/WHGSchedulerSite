@@ -11,6 +11,6 @@ namespace WHGScheduler.Repository.Models
         public string logoImage { get; set; }
         public string title { get; set; }
         public string description { get; set; }
-        public int sponsorID { get; set; }
+        public int id { get; set; }
     }
 }

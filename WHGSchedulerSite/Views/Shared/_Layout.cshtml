@@ -12,13 +12,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <img src="~/assets/img/header.png" />
+                <img src="~/assets/img/header.png" class="img-responsive" />
             </div>
         </div>
     </div>
 
     <div class="container">
-        @RenderBody()
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                @RenderBody()
+            </div>
+        </div>
 
         <hr />
 

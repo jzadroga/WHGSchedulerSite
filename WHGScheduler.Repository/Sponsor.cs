@@ -16,11 +16,24 @@ namespace WHGScheduler.Repository
 
             return sponsorList.Select( sp => new SponsorModel()
             {
-                sponsorID = sp.sponsorID,
+                id = sp.sponsorID,
                 description = sp.description,
                 logoImage = sp.logoImage,
                 title = sp.title
             }).ToList();
+        }
+
+        public static SponsorModel GetByID(int sponsorID)
+        {
+            var sponsorObj = sponsor.Get(sponsorID);
+
+            return (sponsorObj == null) ? new SponsorModel() : new SponsorModel()
+            {
+                id = sponsorObj.sponsorID,
+                description = sponsorObj.description,
+                logoImage = sponsorObj.logoImage,
+                title = sponsorObj.title
+            };
         }
     }
 }
