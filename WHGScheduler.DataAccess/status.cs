@@ -14,5 +14,12 @@ namespace WHGScheduler.DataAccess
 
             return context.status.Where(st => st.component.componentName == component && st.statusName == "active").FirstOrDefault().statusID;
         }
+
+        public static int GetDeleteStatus(string component)
+        {
+            WHGSchedulerDBDataContext context = new WHGSchedulerDBDataContext();
+
+            return context.status.Where(st => st.component.componentName == component && st.statusName == "deleted").FirstOrDefault().statusID;
+        }
     }
 }

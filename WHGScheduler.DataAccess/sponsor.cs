@@ -22,6 +22,18 @@ namespace WHGScheduler.DataAccess
             return context.sponsors.Where(sp => sp.sponsorID == id).FirstOrDefault();
         }
 
+        public static void Delete(int sponsorID)
+        {
+            WHGSchedulerDBDataContext context = new WHGSchedulerDBDataContext();
+
+            var deleteSponsor = context.sponsors.Where(sp => sp.sponsorID == sponsorID).FirstOrDefault();
+
+            deleteSponsor.dateModified = DateTime.Now;
+            deleteSponsor.statusID = status.GetDeleteStatus("sponsor");
+
+            context.SubmitChanges();
+        }
+
         public static void Save(sponsor sponsorObj)
         {
             WHGSchedulerDBDataContext context = new WHGSchedulerDBDataContext();
@@ -33,6 +45,8 @@ namespace WHGScheduler.DataAccess
                 {
                     updateSponsor.name = sponsorObj.name;
                     updateSponsor.logoImage = sponsorObj.logoImage;
+                    updateSponsor.websiteUrl = sponsorObj.websiteUrl;
+                    updateSponsor.description = sponsorObj.description;
                     updateSponsor.dateModified = DateTime.Now;
                 }
             }

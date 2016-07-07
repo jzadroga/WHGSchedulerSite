@@ -19,7 +19,8 @@ namespace WHGScheduler.Repository
                 id = sp.sponsorID,
                 description = sp.description,
                 logoImage = sp.logoImage,
-                name = sp.name
+                name = sp.name,
+                url = sp.websiteUrl
             }).ToList();
         }
 
@@ -32,7 +33,8 @@ namespace WHGScheduler.Repository
                 id = sponsorObj.sponsorID,
                 description = sponsorObj.description,
                 logoImage = sponsorObj.logoImage,
-                name = sponsorObj.name
+                name = sponsorObj.name,
+                url = sponsorObj.websiteUrl
             };
         }
 
@@ -41,8 +43,15 @@ namespace WHGScheduler.Repository
             sponsor.Save( new sponsor(){
                 name = obj.name,
                 sponsorID = obj.id,
-                logoImage = obj.logoImage
+                logoImage = obj.logoImage,
+                websiteUrl = obj.url,
+                description = obj.description
             });
+        }
+
+        public static void Delete(int sponsorID)
+        {
+            sponsor.Delete(sponsorID);
         }
     }
 }

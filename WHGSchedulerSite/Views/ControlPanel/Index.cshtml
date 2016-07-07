@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_ControlPanelLayout.cshtml";
 }
 
-<h3>Sponsors <button data-logo="" data-name="" data-id="0" class="btn btn-primary pull-right edit-sponsor">Add New</button></h3>
+<h3>Sponsors <button data-desc="" data-url="" data-logo="" data-name="" data-id="0" class="btn btn-primary pull-right edit-sponsor">Add New</button></h3>
 
 <table class="table table-striped">
     <thead>
@@ -20,8 +20,8 @@
             <tr>
                 <td>@sponsor.name</td>
                 <td>
-                    <button data-logo="@sponsor.logoImage" data-name="@sponsor.name" data-id="@sponsor.id" class="btn btn-default edit-sponsor">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
+                    <button data-url="@sponsor.url" data-desc="@sponsor.description" data-logo="@sponsor.logoImage" data-name="@sponsor.name" data-id="@sponsor.id" class="btn btn-default edit-sponsor">Edit</button>
+                    <a href="@Url.Action("DeleteSponsor", "ControlPanel", new { id = @sponsor.id })" class="btn btn-danger">Delete</a>
                     <a href="" class="btn btn-warning">Meetings</a>
                 </td>
             </tr>
@@ -43,6 +43,18 @@
                         <label class="control-label col-md-2" for="name">Name</label>
                         <div class="col-md-8">
                             <input type="text" class="form-control" name="name" id="sponsorName" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="url">Website</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="url" id="sponsorUrl" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="description">Description</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" name="description" id="sponsorDescription"></textarea>
                         </div>
                     </div>
                     <div class="form-group">

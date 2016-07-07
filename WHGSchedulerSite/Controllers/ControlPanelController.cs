@@ -21,6 +21,14 @@ namespace WHGSchedulerSite.Controllers
             });
         }
 
+        [HttpGet]
+        public ActionResult DeleteSponsor(int id)
+        {
+            Sponsor.Delete(id);
+
+            return RedirectToAction("Index", "ControlPanel");
+        }
+
         [HttpPost]
         public ActionResult SaveSponsor(SponsorModel sponsor, HttpPostedFileBase logoFile)
         {
