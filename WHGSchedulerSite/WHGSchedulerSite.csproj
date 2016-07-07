@@ -121,12 +121,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ControlPanelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MeetingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="ViewModels\MeetingsViewModel.cs" />
     <Compile Include="ViewModels\SponsorsViewModel.cs" />
   </ItemGroup>
@@ -134,6 +137,7 @@
     <Content Include="assets\css\main.css" />
     <Content Include="assets\img\header.png" />
     <Content Include="assets\img\logos\sample.png" />
+    <Content Include="assets\js\controlPanel.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -164,6 +168,9 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\2016WHGGlobalScheduler - Web Deploy.pubxml" />
     <Content Include="Views\Meetings\Index.cshtml" />
+    <Content Include="Views\Shared\_ControlPanelLayout.cshtml" />
+    <Content Include="Views\ControlPanel\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

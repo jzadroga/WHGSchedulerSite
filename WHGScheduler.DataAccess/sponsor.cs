@@ -21,5 +21,31 @@ namespace WHGScheduler.DataAccess
 
             return context.sponsors.Where(sp => sp.sponsorID == id).FirstOrDefault();
         }
+
+        public static void Save(sponsor sponsorObj)
+        {
+            WHGSchedulerDBDataContext context = new WHGSchedulerDBDataContext();
+
+            if (sponsorObj.sponsorID != 0)
+            {
+                var updateSponsor = context.sponsors.Where(sp => sp.sponsorID == sponsorObj.sponsorID).FirstOrDefault();
+                if(updateSponsor != null)
+                {
+                    updateSponsor.name = sponsorObj.name;
+                    updateSponsor.logoImage = sponsorObj.logoImage;
+                    updateSponsor.dateModified = DateTime.Now;
+                }
+            }
+            else
+            {
+                sponsorObj.dateCreated = DateTime.Now;
+                sponsorObj.dateModified = DateTime.Now;
+                sponsorObj.statusID = status.GetActiveStatus("sponsor");
+
+                context.sponsors.InsertOnSubmit(sponsorObj);
+            }
+
+            context.SubmitChanges();
+        }
     }
 }
