@@ -10,9 +10,9 @@ namespace WHGScheduler.Repository
 {
     public class Meeting
     {
-        public static List<MeetingModel> GetList(bool activeOnly)
+        public static List<MeetingModel> GetList(int sponsorID, bool activeOnly)
         {
-            var meetingList = meeting.GetList(activeOnly);
+            var meetingList = meeting.GetList(sponsorID, activeOnly);
 
             return meetingList.Select(mt => new MeetingModel()
             {

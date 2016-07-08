@@ -8,11 +8,12 @@ namespace WHGScheduler.DataAccess
 {
     public partial class meeting
     {
-        public static List<meeting> GetList(bool activeOnly)
+        public static List<meeting> GetList(int sponsorID, bool activeOnly)
         {
             WHGSchedulerDBDataContext context = new WHGSchedulerDBDataContext();
 
-            return (activeOnly) ? context.meetings.Where(mt => mt.status.statusName == "active").OrderBy( mt => mt.startDate).ToList() : context.meetings.ToList(); 
+            return (activeOnly) ? context.meetings.Where(mt => mt.status.statusName == "active" && mt.sponsorID == sponsorID).OrderBy( mt => mt.startDate).ToList() : 
+                context.meetings.Where(mt => mt.sponsorID == sponsorID).ToList(); 
         }
 
         public static meeting Get(int id)

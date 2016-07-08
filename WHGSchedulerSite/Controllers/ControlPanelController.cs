@@ -42,7 +42,7 @@ namespace WHGSchedulerSite.Controllers
             return View( new MeetingsViewModel()
             {
                 sponsor = Sponsor.GetByID(id),
-                meetingsList = Meeting.GetList(true)
+                meetingsList = Meeting.GetList(id, true)
             });
         }
 
