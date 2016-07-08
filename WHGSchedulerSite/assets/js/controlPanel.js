@@ -1,4 +1,21 @@
 ﻿$(document).ready(function () {
+    $('.date').datetimepicker();
+
+    $('.edit-meeting').click(function (event) {
+        var meeting = {
+            id: $(this).attr('data-id'),
+            start: $(this).attr('data-start'),
+            end: $(this).attr('data-end'),
+            requests: $(this).attr('data-requests')
+        };
+
+        $('#meetingID').val(meeting.id);
+        $('#meetingStartDate').val(meeting.start);
+        $('#meetingEndDate').val(meeting.end);
+        $('#meetingRequests').val(meeting.requests);
+
+        $('#mdl-meeting').modal('show');
+    });
 
     $('.edit-sponsor').click(function (event) {
         var sponsor = {

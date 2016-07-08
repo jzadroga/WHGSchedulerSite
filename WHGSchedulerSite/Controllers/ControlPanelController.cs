@@ -29,6 +29,23 @@ namespace WHGSchedulerSite.Controllers
             return RedirectToAction("Index", "ControlPanel");
         }
 
+        [HttpGet]
+        public ActionResult DeleteMeeting(int id, int sponsor)
+        {
+            Meeting.Delete(id);
+
+            return RedirectToAction("Meetings", "ControlPanel", new { id = sponsor });
+        }
+
+        public ActionResult Meetings(int id)
+        {
+            return View( new MeetingsViewModel()
+            {
+                sponsor = Sponsor.GetByID(id),
+                meetingsList = Meeting.GetList(true)
+            });
+        }
+
         [HttpPost]
         public ActionResult SaveSponsor(SponsorModel sponsor, HttpPostedFileBase logoFile)
         {
@@ -43,6 +60,14 @@ namespace WHGSchedulerSite.Controllers
             Sponsor.Save(sponsor);
 
             return RedirectToAction("Index", "ControlPanel");
+        }
+
+        [HttpPost]
+        public ActionResult SaveMeeting(MeetingModel meeting)
+        {
+            Meeting.Save(meeting);
+
+            return RedirectToAction("Meetings", "ControlPanel", new { id = meeting.sponsorID });
         }
     }
 }

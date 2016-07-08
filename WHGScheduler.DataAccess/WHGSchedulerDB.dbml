@@ -27,6 +27,7 @@
       <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="websiteUrl" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Association Name="sponsor_meeting" Member="meetings" ThisKey="sponsorID" OtherKey="sponsorID" Type="meeting" />
       <Association Name="status_sponsor" Member="status" ThisKey="statusID" OtherKey="statusID" Type="status" IsForeignKey="true" />
     </Type>
   </Table>
@@ -37,6 +38,7 @@
       <Column Name="componentID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="status_sponsor" Member="sponsors" ThisKey="statusID" OtherKey="statusID" Type="sponsor" />
       <Association Name="status_user" Member="users" ThisKey="statusID" OtherKey="statusID" Type="user" />
+      <Association Name="status_meeting" Member="meetings" ThisKey="statusID" OtherKey="statusID" Type="meeting" />
       <Association Name="component_status" Member="component" ThisKey="componentID" OtherKey="componentID" Type="component" IsForeignKey="true" />
     </Type>
   </Table>
@@ -51,8 +53,34 @@
       <Column Name="statusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="roleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="user_userRole" Member="userRoles" ThisKey="userID" OtherKey="userID" Type="userRole" />
+      <Association Name="user_meetingRequest" Member="meetingRequests" ThisKey="userID" OtherKey="userID" Type="meetingRequest" />
       <Association Name="status_user" Member="status" ThisKey="statusID" OtherKey="statusID" Type="status" IsForeignKey="true" />
       <Association Name="userRole_user" Member="userRole" ThisKey="roleID" OtherKey="userRoleID" Type="userRole" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.meeting" Member="meetings">
+    <Type Name="meeting">
+      <Column Name="meetingID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="startDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="endDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="availableRequests" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="sponsorID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="statusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="meeting_meetingRequest" Member="meetingRequests" ThisKey="meetingID" OtherKey="meetingID" Type="meetingRequest" />
+      <Association Name="sponsor_meeting" Member="sponsor" ThisKey="sponsorID" OtherKey="sponsorID" Type="sponsor" IsForeignKey="true" />
+      <Association Name="status_meeting" Member="status" ThisKey="statusID" OtherKey="statusID" Type="status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.meetingRequest" Member="meetingRequests">
+    <Type Name="meetingRequest">
+      <Column Name="meetingRequestID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="userID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="meetingID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="meeting_meetingRequest" Member="meeting" ThisKey="meetingID" OtherKey="meetingID" Type="meeting" IsForeignKey="true" />
+      <Association Name="user_meetingRequest" Member="user" ThisKey="userID" OtherKey="userID" Type="user" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

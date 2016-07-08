@@ -45,6 +45,12 @@ namespace WHGScheduler.DataAccess
     partial void Insertuser(user instance);
     partial void Updateuser(user instance);
     partial void Deleteuser(user instance);
+    partial void Insertmeeting(meeting instance);
+    partial void Updatemeeting(meeting instance);
+    partial void Deletemeeting(meeting instance);
+    partial void InsertmeetingRequest(meetingRequest instance);
+    partial void UpdatemeetingRequest(meetingRequest instance);
+    partial void DeletemeetingRequest(meetingRequest instance);
     #endregion
 		
 		public WHGSchedulerDBDataContext() : 
@@ -114,6 +120,22 @@ namespace WHGScheduler.DataAccess
 			get
 			{
 				return this.GetTable<user>();
+			}
+		}
+		
+		public System.Data.Linq.Table<meeting> meetings
+		{
+			get
+			{
+				return this.GetTable<meeting>();
+			}
+		}
+		
+		public System.Data.Linq.Table<meetingRequest> meetingRequests
+		{
+			get
+			{
+				return this.GetTable<meetingRequest>();
 			}
 		}
 	}
@@ -435,6 +457,8 @@ namespace WHGScheduler.DataAccess
 		
 		private string _websiteUrl;
 		
+		private EntitySet<meeting> _meetings;
+		
 		private EntityRef<status> _status;
 		
     #region Extensibility Method Definitions
@@ -463,6 +487,7 @@ namespace WHGScheduler.DataAccess
 		
 		public sponsor()
 		{
+			this._meetings = new EntitySet<meeting>(new Action<meeting>(this.attach_meetings), new Action<meeting>(this.detach_meetings));
 			this._status = default(EntityRef<status>);
 			OnCreated();
 		}
@@ -651,6 +676,19 @@ namespace WHGScheduler.DataAccess
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="sponsor_meeting", Storage="_meetings", ThisKey="sponsorID", OtherKey="sponsorID")]
+		public EntitySet<meeting> meetings
+		{
+			get
+			{
+				return this._meetings;
+			}
+			set
+			{
+				this._meetings.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="status_sponsor", Storage="_status", ThisKey="statusID", OtherKey="statusID", IsForeignKey=true)]
 		public status status
 		{
@@ -704,6 +742,18 @@ namespace WHGScheduler.DataAccess
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_meetings(meeting entity)
+		{
+			this.SendPropertyChanging();
+			entity.sponsor = this;
+		}
+		
+		private void detach_meetings(meeting entity)
+		{
+			this.SendPropertyChanging();
+			entity.sponsor = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.status")]
@@ -721,6 +771,8 @@ namespace WHGScheduler.DataAccess
 		private EntitySet<sponsor> _sponsors;
 		
 		private EntitySet<user> _users;
+		
+		private EntitySet<meeting> _meetings;
 		
 		private EntityRef<component> _component;
 		
@@ -740,6 +792,7 @@ namespace WHGScheduler.DataAccess
 		{
 			this._sponsors = new EntitySet<sponsor>(new Action<sponsor>(this.attach_sponsors), new Action<sponsor>(this.detach_sponsors));
 			this._users = new EntitySet<user>(new Action<user>(this.attach_users), new Action<user>(this.detach_users));
+			this._meetings = new EntitySet<meeting>(new Action<meeting>(this.attach_meetings), new Action<meeting>(this.detach_meetings));
 			this._component = default(EntityRef<component>);
 			OnCreated();
 		}
@@ -834,6 +887,19 @@ namespace WHGScheduler.DataAccess
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="status_meeting", Storage="_meetings", ThisKey="statusID", OtherKey="statusID")]
+		public EntitySet<meeting> meetings
+		{
+			get
+			{
+				return this._meetings;
+			}
+			set
+			{
+				this._meetings.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="component_status", Storage="_component", ThisKey="componentID", OtherKey="componentID", IsForeignKey=true)]
 		public component component
 		{
@@ -911,6 +977,18 @@ namespace WHGScheduler.DataAccess
 			this.SendPropertyChanging();
 			entity.status = null;
 		}
+		
+		private void attach_meetings(meeting entity)
+		{
+			this.SendPropertyChanging();
+			entity.status = this;
+		}
+		
+		private void detach_meetings(meeting entity)
+		{
+			this.SendPropertyChanging();
+			entity.status = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[user]")]
@@ -936,6 +1014,8 @@ namespace WHGScheduler.DataAccess
 		private int _roleID;
 		
 		private EntitySet<userRole> _userRoles;
+		
+		private EntitySet<meetingRequest> _meetingRequests;
 		
 		private EntityRef<status> _status;
 		
@@ -966,6 +1046,7 @@ namespace WHGScheduler.DataAccess
 		public user()
 		{
 			this._userRoles = new EntitySet<userRole>(new Action<userRole>(this.attach_userRoles), new Action<userRole>(this.detach_userRoles));
+			this._meetingRequests = new EntitySet<meetingRequest>(new Action<meetingRequest>(this.attach_meetingRequests), new Action<meetingRequest>(this.detach_meetingRequests));
 			this._status = default(EntityRef<status>);
 			this._userRole = default(EntityRef<userRole>);
 			OnCreated();
@@ -1152,6 +1233,19 @@ namespace WHGScheduler.DataAccess
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_meetingRequest", Storage="_meetingRequests", ThisKey="userID", OtherKey="userID")]
+		public EntitySet<meetingRequest> meetingRequests
+		{
+			get
+			{
+				return this._meetingRequests;
+			}
+			set
+			{
+				this._meetingRequests.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="status_user", Storage="_status", ThisKey="statusID", OtherKey="statusID", IsForeignKey=true)]
 		public status status
 		{
@@ -1250,6 +1344,574 @@ namespace WHGScheduler.DataAccess
 		{
 			this.SendPropertyChanging();
 			entity.user = null;
+		}
+		
+		private void attach_meetingRequests(meetingRequest entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = this;
+		}
+		
+		private void detach_meetingRequests(meetingRequest entity)
+		{
+			this.SendPropertyChanging();
+			entity.user = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.meeting")]
+	public partial class meeting : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _meetingID;
+		
+		private string _title;
+		
+		private System.DateTime _startDate;
+		
+		private System.DateTime _endDate;
+		
+		private int _availableRequests;
+		
+		private int _sponsorID;
+		
+		private System.DateTime _dateCreated;
+		
+		private int _statusID;
+		
+		private EntitySet<meetingRequest> _meetingRequests;
+		
+		private EntityRef<sponsor> _sponsor;
+		
+		private EntityRef<status> _status;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnmeetingIDChanging(int value);
+    partial void OnmeetingIDChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void OnstartDateChanging(System.DateTime value);
+    partial void OnstartDateChanged();
+    partial void OnendDateChanging(System.DateTime value);
+    partial void OnendDateChanged();
+    partial void OnavailableRequestsChanging(int value);
+    partial void OnavailableRequestsChanged();
+    partial void OnsponsorIDChanging(int value);
+    partial void OnsponsorIDChanged();
+    partial void OndateCreatedChanging(System.DateTime value);
+    partial void OndateCreatedChanged();
+    partial void OnstatusIDChanging(int value);
+    partial void OnstatusIDChanged();
+    #endregion
+		
+		public meeting()
+		{
+			this._meetingRequests = new EntitySet<meetingRequest>(new Action<meetingRequest>(this.attach_meetingRequests), new Action<meetingRequest>(this.detach_meetingRequests));
+			this._sponsor = default(EntityRef<sponsor>);
+			this._status = default(EntityRef<status>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_meetingID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int meetingID
+		{
+			get
+			{
+				return this._meetingID;
+			}
+			set
+			{
+				if ((this._meetingID != value))
+				{
+					this.OnmeetingIDChanging(value);
+					this.SendPropertyChanging();
+					this._meetingID = value;
+					this.SendPropertyChanged("meetingID");
+					this.OnmeetingIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(50)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_startDate", DbType="DateTime NOT NULL")]
+		public System.DateTime startDate
+		{
+			get
+			{
+				return this._startDate;
+			}
+			set
+			{
+				if ((this._startDate != value))
+				{
+					this.OnstartDateChanging(value);
+					this.SendPropertyChanging();
+					this._startDate = value;
+					this.SendPropertyChanged("startDate");
+					this.OnstartDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_endDate", DbType="DateTime NOT NULL")]
+		public System.DateTime endDate
+		{
+			get
+			{
+				return this._endDate;
+			}
+			set
+			{
+				if ((this._endDate != value))
+				{
+					this.OnendDateChanging(value);
+					this.SendPropertyChanging();
+					this._endDate = value;
+					this.SendPropertyChanged("endDate");
+					this.OnendDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_availableRequests", DbType="Int NOT NULL")]
+		public int availableRequests
+		{
+			get
+			{
+				return this._availableRequests;
+			}
+			set
+			{
+				if ((this._availableRequests != value))
+				{
+					this.OnavailableRequestsChanging(value);
+					this.SendPropertyChanging();
+					this._availableRequests = value;
+					this.SendPropertyChanged("availableRequests");
+					this.OnavailableRequestsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sponsorID", DbType="Int NOT NULL")]
+		public int sponsorID
+		{
+			get
+			{
+				return this._sponsorID;
+			}
+			set
+			{
+				if ((this._sponsorID != value))
+				{
+					if (this._sponsor.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnsponsorIDChanging(value);
+					this.SendPropertyChanging();
+					this._sponsorID = value;
+					this.SendPropertyChanged("sponsorID");
+					this.OnsponsorIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateCreated", DbType="DateTime NOT NULL")]
+		public System.DateTime dateCreated
+		{
+			get
+			{
+				return this._dateCreated;
+			}
+			set
+			{
+				if ((this._dateCreated != value))
+				{
+					this.OndateCreatedChanging(value);
+					this.SendPropertyChanging();
+					this._dateCreated = value;
+					this.SendPropertyChanged("dateCreated");
+					this.OndateCreatedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_statusID", DbType="Int NOT NULL")]
+		public int statusID
+		{
+			get
+			{
+				return this._statusID;
+			}
+			set
+			{
+				if ((this._statusID != value))
+				{
+					if (this._status.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnstatusIDChanging(value);
+					this.SendPropertyChanging();
+					this._statusID = value;
+					this.SendPropertyChanged("statusID");
+					this.OnstatusIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="meeting_meetingRequest", Storage="_meetingRequests", ThisKey="meetingID", OtherKey="meetingID")]
+		public EntitySet<meetingRequest> meetingRequests
+		{
+			get
+			{
+				return this._meetingRequests;
+			}
+			set
+			{
+				this._meetingRequests.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="sponsor_meeting", Storage="_sponsor", ThisKey="sponsorID", OtherKey="sponsorID", IsForeignKey=true)]
+		public sponsor sponsor
+		{
+			get
+			{
+				return this._sponsor.Entity;
+			}
+			set
+			{
+				sponsor previousValue = this._sponsor.Entity;
+				if (((previousValue != value) 
+							|| (this._sponsor.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._sponsor.Entity = null;
+						previousValue.meetings.Remove(this);
+					}
+					this._sponsor.Entity = value;
+					if ((value != null))
+					{
+						value.meetings.Add(this);
+						this._sponsorID = value.sponsorID;
+					}
+					else
+					{
+						this._sponsorID = default(int);
+					}
+					this.SendPropertyChanged("sponsor");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="status_meeting", Storage="_status", ThisKey="statusID", OtherKey="statusID", IsForeignKey=true)]
+		public status status
+		{
+			get
+			{
+				return this._status.Entity;
+			}
+			set
+			{
+				status previousValue = this._status.Entity;
+				if (((previousValue != value) 
+							|| (this._status.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._status.Entity = null;
+						previousValue.meetings.Remove(this);
+					}
+					this._status.Entity = value;
+					if ((value != null))
+					{
+						value.meetings.Add(this);
+						this._statusID = value.statusID;
+					}
+					else
+					{
+						this._statusID = default(int);
+					}
+					this.SendPropertyChanged("status");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_meetingRequests(meetingRequest entity)
+		{
+			this.SendPropertyChanging();
+			entity.meeting = this;
+		}
+		
+		private void detach_meetingRequests(meetingRequest entity)
+		{
+			this.SendPropertyChanging();
+			entity.meeting = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.meetingRequest")]
+	public partial class meetingRequest : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _meetingRequestID;
+		
+		private int _userID;
+		
+		private int _meetingID;
+		
+		private System.DateTime _dateCreated;
+		
+		private EntityRef<meeting> _meeting;
+		
+		private EntityRef<user> _user;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnmeetingRequestIDChanging(int value);
+    partial void OnmeetingRequestIDChanged();
+    partial void OnuserIDChanging(int value);
+    partial void OnuserIDChanged();
+    partial void OnmeetingIDChanging(int value);
+    partial void OnmeetingIDChanged();
+    partial void OndateCreatedChanging(System.DateTime value);
+    partial void OndateCreatedChanged();
+    #endregion
+		
+		public meetingRequest()
+		{
+			this._meeting = default(EntityRef<meeting>);
+			this._user = default(EntityRef<user>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_meetingRequestID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int meetingRequestID
+		{
+			get
+			{
+				return this._meetingRequestID;
+			}
+			set
+			{
+				if ((this._meetingRequestID != value))
+				{
+					this.OnmeetingRequestIDChanging(value);
+					this.SendPropertyChanging();
+					this._meetingRequestID = value;
+					this.SendPropertyChanged("meetingRequestID");
+					this.OnmeetingRequestIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userID", DbType="Int NOT NULL")]
+		public int userID
+		{
+			get
+			{
+				return this._userID;
+			}
+			set
+			{
+				if ((this._userID != value))
+				{
+					if (this._user.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnuserIDChanging(value);
+					this.SendPropertyChanging();
+					this._userID = value;
+					this.SendPropertyChanged("userID");
+					this.OnuserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_meetingID", DbType="Int NOT NULL")]
+		public int meetingID
+		{
+			get
+			{
+				return this._meetingID;
+			}
+			set
+			{
+				if ((this._meetingID != value))
+				{
+					if (this._meeting.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnmeetingIDChanging(value);
+					this.SendPropertyChanging();
+					this._meetingID = value;
+					this.SendPropertyChanged("meetingID");
+					this.OnmeetingIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateCreated", DbType="DateTime NOT NULL")]
+		public System.DateTime dateCreated
+		{
+			get
+			{
+				return this._dateCreated;
+			}
+			set
+			{
+				if ((this._dateCreated != value))
+				{
+					this.OndateCreatedChanging(value);
+					this.SendPropertyChanging();
+					this._dateCreated = value;
+					this.SendPropertyChanged("dateCreated");
+					this.OndateCreatedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="meeting_meetingRequest", Storage="_meeting", ThisKey="meetingID", OtherKey="meetingID", IsForeignKey=true)]
+		public meeting meeting
+		{
+			get
+			{
+				return this._meeting.Entity;
+			}
+			set
+			{
+				meeting previousValue = this._meeting.Entity;
+				if (((previousValue != value) 
+							|| (this._meeting.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._meeting.Entity = null;
+						previousValue.meetingRequests.Remove(this);
+					}
+					this._meeting.Entity = value;
+					if ((value != null))
+					{
+						value.meetingRequests.Add(this);
+						this._meetingID = value.meetingID;
+					}
+					else
+					{
+						this._meetingID = default(int);
+					}
+					this.SendPropertyChanged("meeting");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_meetingRequest", Storage="_user", ThisKey="userID", OtherKey="userID", IsForeignKey=true)]
+		public user user
+		{
+			get
+			{
+				return this._user.Entity;
+			}
+			set
+			{
+				user previousValue = this._user.Entity;
+				if (((previousValue != value) 
+							|| (this._user.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._user.Entity = null;
+						previousValue.meetingRequests.Remove(this);
+					}
+					this._user.Entity = value;
+					if ((value != null))
+					{
+						value.meetingRequests.Add(this);
+						this._userID = value.userID;
+					}
+					else
+					{
+						this._userID = default(int);
+					}
+					this.SendPropertyChanged("user");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

@@ -12,7 +12,7 @@ namespace WHGScheduler.DataAccess
         {
             WHGSchedulerDBDataContext context = new WHGSchedulerDBDataContext();
 
-            return (activeOnly) ? context.sponsors.Where(sp => sp.status.statusName == "active").ToList() : context.sponsors.ToList(); 
+            return (activeOnly) ? context.sponsors.Where(sp => sp.status.statusName == "active").OrderBy(sp => sp.name).ToList() : context.sponsors.ToList(); 
         }
 
         public static sponsor Get(int id)

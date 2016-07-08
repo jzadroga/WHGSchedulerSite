@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="meeting.cs" />
     <Compile Include="status.cs" />
     <Compile Include="user.cs" />
     <Compile Include="sponsor.cs" />

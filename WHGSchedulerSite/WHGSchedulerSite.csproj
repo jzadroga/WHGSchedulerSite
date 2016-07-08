@@ -138,8 +138,14 @@
     <Content Include="assets\img\header.png" />
     <Content Include="assets\img\logos\sample.png" />
     <Content Include="assets\js\controlPanel.js" />
+    <Content Include="assets\css\bootstrap-datetimepicker.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="assets\js\libs\bootstrap-datetimepicker.min.js" />
+    <Content Include="assets\js\libs\moment-with-locales.min.js" />
+    <Content Include="assets\js\libs\moment.min.js" />
+    <Content Include="assets\js\libs\npm.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -166,11 +172,15 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Properties\PublishProfiles\2016WHGGlobalScheduler - Web Deploy.pubxml" />
     <Content Include="Views\Meetings\Index.cshtml" />
     <Content Include="Views\Shared\_ControlPanelLayout.cshtml" />
     <Content Include="Views\ControlPanel\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\ControlPanel\Meetings.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

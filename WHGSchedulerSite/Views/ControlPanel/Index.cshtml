@@ -22,7 +22,7 @@
                 <td>
                     <button data-url="@sponsor.url" data-desc="@sponsor.description" data-logo="@sponsor.logoImage" data-name="@sponsor.name" data-id="@sponsor.id" class="btn btn-default edit-sponsor">Edit</button>
                     <a href="@Url.Action("DeleteSponsor", "ControlPanel", new { id = @sponsor.id })" class="btn btn-danger">Delete</a>
-                    <a href="" class="btn btn-warning">Meetings</a>
+                    <a href="@Url.Action("Meetings", "ControlPanel", new { id = @sponsor.id })" class="btn btn-warning">Meetings</a>
                 </td>
             </tr>
         }
