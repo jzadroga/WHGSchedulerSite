@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WHGScheduler.Repository;
+using WHGScheduler.Repository.Models;
 using WHGSchedulerSite.ViewModels;
 
 namespace WHGSchedulerSite.Controllers
@@ -18,9 +19,11 @@ namespace WHGSchedulerSite.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveRegistrant()
+        public JsonResult SaveRegistrant(RegistrantModel registrant)
         {
             bool success = true;
+
+            Registrant.Save(registrant);
 
             return Json(new { Success = success });
         }

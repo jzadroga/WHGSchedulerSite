@@ -1,12 +1,13 @@
 ﻿$(document).ready(function () {
 
-    $('#save-meeting-registrant').click( function() {
-        $('#frmSaveRegistrant').hide();
-
+    $('#save-meeting-registrant').click(function () {
+        var $registerFrm = $('#frmSaveRegistrant');
+        
         // Send the data using post
-        var posting = $.post($('#frmSaveRegistrant').attr('action'), { s: 'tt' });
+        var posting = $.post($registerFrm.attr('action'), $registerFrm.serialize());
 
         posting.done(function (data) {
+            $('#frmSaveRegistrant').hide();
             $('#confirmView').show();
             console.log(data);
         });
