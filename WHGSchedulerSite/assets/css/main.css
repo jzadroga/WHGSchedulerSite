@@ -6,3 +6,7 @@ h1.title{
 p.instructions{
     font-size: 18px;
 }
+
+.borderless td, .borderless th {
+    border: none;
+}
