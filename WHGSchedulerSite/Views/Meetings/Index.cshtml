@@ -42,10 +42,78 @@
                     <tbody>
                         <tr>
                             <td>8:45 am - 9:00 am</td>
-                            <td><button class="btn btn-primary">Available</button></td>
+                            <td><button data-time="" data-id="" data-sponsor="@Model.sponsor.id" class="btn btn-primary register-meeting">Available</button></td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mdl-register" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Request this time</h4>
+            </div>
+            <form id="frmSaveRegistrant" method="post" action="@Url.Action("SaveRegistrant", "Meetings")">
+                <input type="hidden" name="id" id="meetingID" value="" />
+                <input type="hidden" name="sponsorID" id="sponsorID" value="@Model.sponsor.id" />
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" name="firstname" placeholder="Enter First Name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>                     
+                        <input type="text" class="form-control" name="lastname" placeholder="Enter Last Name" required />                     
+                    </div>
+                    <div class="form-group">
+                        <label for="attendeetype">Attendee Type <small>(Owner, General Manager, Management Type)</small></label>
+                        <input type="text" class="form-control" name="attendeetype" placeholder="Enter Attendee Type" required />
+                    </div>    
+                    <div class="form-group">
+                        <label for="brands">Brand(s)</label>
+                        <input type="text" class="form-control" name="brands" placeholder="Enter Brand(s)" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" name="title" placeholder="Enter Title" required />
+                    </div> 
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" placeholder="Enter Email" required />
+                    </div> 
+                    <div class="form-group">
+                        <label for="location">Location <small>(Country, City, State/Province)</small></label>
+                        <input type="text" class="form-control" name="location" placeholder="Enter Location" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="bizphone">Business Phone</label>
+                        <input type="text" class="form-control" name="bizphone" placeholder="Enter Business Phone" required />
+                    </div>  
+                    <div class="form-group">
+                        <label for="mobilephone">Mobile Phone</label>
+                        <input type="text" class="form-control" name="mobilephone" placeholder="Enter Mobile Phone" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="comments">Please tell us why you would like to speak with us <small>(please be as specific as possible)</small></label>
+                        <textarea class="form-control" name="comments" placeholder="Enter Comments"></textarea>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="save-meeting-registrant" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+            <div id="confirmView" style="display: none">
+                <div class="modal-body">
+                    <h3 class="text-primary">Thank you for requesting this time.</h3>
+                    <p>You will receive a confirmation email shortly.</p>
+                </div>
             </div>
         </div>
     </div>

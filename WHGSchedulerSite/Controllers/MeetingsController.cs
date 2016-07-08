@@ -16,5 +16,13 @@ namespace WHGSchedulerSite.Controllers
                 sponsor = Sponsor.GetByID(sponsor)
             });
         }
+
+        [HttpPost]
+        public JsonResult SaveRegistrant()
+        {
+            bool success = true;
+
+            return Json(new { Success = success });
+        }
     }
 }
