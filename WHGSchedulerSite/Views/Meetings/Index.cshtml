@@ -1,4 +1,4 @@
-﻿@model WHGSchedulerSite.ViewModels.MeetingsViewModel
+﻿@model WHGSchedulerSite.ViewModels.SponsorMeetingsViewModel
 
 <div class="row">
     <div class="col-md-12">
@@ -26,9 +26,10 @@
     </div>
 </div>
 <div class="row">
+    @foreach (var dayMeetings in Model.meetings) {
     <div class="col-md-5">
         <h1 class="title text-primary">
-            DAY 1
+            DAY @dayMeetings.day
         </h1>
         <div class="panel panel-default">
             <div class="panel-body">
@@ -40,15 +41,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach (var meeting in dayMeetings.meetings) {
                         <tr>
-                            <td>8:45 am - 9:00 am</td>
+                            <td>@meeting.timeLabel</td>
                             <td><button data-time="" data-id="" data-sponsor="@Model.sponsor.id" class="btn btn-primary register-meeting">Available</button></td>
                         </tr>
+                        }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    }
 </div>
 
 <div id="mdl-register" class="modal fade" tabindex="-1" role="dialog">

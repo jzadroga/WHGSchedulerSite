@@ -13,8 +13,11 @@ namespace WHGSchedulerSite.Controllers
     {
         public ActionResult Index(int sponsor)
         {
-            return View( new MeetingsViewModel() {
-                sponsor = Sponsor.GetByID(sponsor)
+            Meeting.GetListByDay(sponsor);
+
+            return View( new SponsorMeetingsViewModel() {
+                sponsor = Sponsor.GetByID(sponsor),
+                meetings = Meeting.GetListByDay(sponsor)
             });
         }
 

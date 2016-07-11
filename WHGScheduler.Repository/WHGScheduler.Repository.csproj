@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Models\MeetingModel.cs" />
     <Compile Include="Models\RegistrantModel.cs" />
+    <Compile Include="Models\SponsorMeetingsModel.cs" />
     <Compile Include="Models\SponsorModel.cs" />
     <Compile Include="AccountUser.cs" />
     <Compile Include="Meeting.cs" />

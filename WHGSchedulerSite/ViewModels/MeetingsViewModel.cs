@@ -18,4 +18,16 @@ namespace WHGSchedulerSite.ViewModels
             this.meetingsList = new List<MeetingModel>(); 
         }
     }
+
+    public class SponsorMeetingsViewModel
+    {
+        public SponsorModel sponsor { get; set; }
+        public List<SponsorMeetingsModel> meetings { get; set; }
+
+        public SponsorMeetingsViewModel()
+        {
+            this.sponsor = new SponsorModel();
+            this.meetings = new List<SponsorMeetingsModel>();
+        }
+    }
 }

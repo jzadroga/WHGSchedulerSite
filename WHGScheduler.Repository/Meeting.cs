@@ -10,6 +10,23 @@ namespace WHGScheduler.Repository
 {
     public class Meeting
     {
+        public static List<SponsorMeetingsModel> GetListByDay(int sponsorID)
+        {
+            var dailyMeetings = meeting.GetListByDay(sponsorID);
+            return dailyMeetings.Select(smt => new SponsorMeetingsModel()
+            {
+                day = smt.Day,
+                meetings = smt.Meetings.Select( mt => new MeetingModel()
+                {
+                   id = mt.meetingID,
+                   startDate = mt.startDate,
+                   endDate = mt.endDate,
+                   available = (mt.availableRequests > mt.registrants) ? true : false,
+                   timeLabel = mt.startDate.ToShortTimeString().ToLower() + " - " + mt.endDate.ToShortTimeString().ToLower()
+                }).ToList()
+            }).ToList();
+        }
+
         public static List<MeetingModel> GetList(int sponsorID, bool activeOnly)
         {
             var meetingList = meeting.GetList(sponsorID, activeOnly);

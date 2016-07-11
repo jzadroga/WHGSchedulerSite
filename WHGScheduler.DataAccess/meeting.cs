@@ -8,12 +8,38 @@ namespace WHGScheduler.DataAccess
 {
     public partial class meeting
     {
+        public int registrants
+        {
+            get
+            {
+                if (this.meetingRequests == null)
+                    return 0;
+
+                return this.meetingRequests.Count();
+            }
+        }
+
         public static List<meeting> GetList(int sponsorID, bool activeOnly)
         {
             WHGSchedulerDBDataContext context = new WHGSchedulerDBDataContext();
 
             return (activeOnly) ? context.meetings.Where(mt => mt.status.statusName == "active" && mt.sponsorID == sponsorID).OrderBy( mt => mt.startDate).ToList() : 
                 context.meetings.Where(mt => mt.sponsorID == sponsorID).ToList(); 
+        }
+
+        public static List<MeetingsByDay> GetListByDay(int sponsorID)
+        {
+            WHGSchedulerDBDataContext context = new WHGSchedulerDBDataContext();
+            
+            return context.meetings
+                            .Where( mt => mt.status.statusName == "active" && mt.sponsorID == sponsorID)
+                            .OrderByDescending( mt => mt.startDate) 
+                            .GroupBy( mt =>mt.startDate.Day ).ToList()
+                            .Select(( ds, ind ) => new MeetingsByDay
+                            {
+                                Day = ind + 1,
+                                Meetings = ds.ToList()
+                            }).ToList();
         }
 
         public static meeting Get(int id)
@@ -58,5 +84,11 @@ namespace WHGScheduler.DataAccess
 
             context.SubmitChanges();
         }
+    }
+
+    public class MeetingsByDay
+    {
+        public int Day { get; set; }
+        public List<meeting> Meetings { get; set; }
     }
 }

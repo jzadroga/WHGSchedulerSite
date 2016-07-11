@@ -13,5 +13,7 @@ namespace WHGScheduler.Repository.Models
         public int requests { get; set; }
         public int id { get; set; }
         public int sponsorID { get; set; }
+        public string timeLabel { get; set; }
+        public bool available { get; set; }
     }
 }
