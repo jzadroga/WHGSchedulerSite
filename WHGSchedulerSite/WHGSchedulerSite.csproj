@@ -131,6 +131,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="ViewModels\MeetingsViewModel.cs" />
+    <Compile Include="ViewModels\RegistrantsViewModel.cs" />
     <Compile Include="ViewModels\SponsorsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +183,7 @@
     <Content Include="Views\ControlPanel\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\ControlPanel\Meetings.cshtml" />
+    <Content Include="Views\ControlPanel\Registrants.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

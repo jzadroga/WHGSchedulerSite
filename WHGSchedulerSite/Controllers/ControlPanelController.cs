@@ -37,6 +37,14 @@ namespace WHGSchedulerSite.Controllers
             return RedirectToAction("Meetings", "ControlPanel", new { id = sponsor });
         }
 
+        public ActionResult Registrants(int meetingID)
+        {
+            return View( new RegistrantsViewModel()
+            {
+                registrants = Registrant.GetListByMeeting(meetingID)
+            });
+        }
+
         public ActionResult Meetings(int id)
         {
             return View( new MeetingsViewModel()

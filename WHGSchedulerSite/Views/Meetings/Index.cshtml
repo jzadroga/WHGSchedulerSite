@@ -44,7 +44,11 @@
                         @foreach (var meeting in dayMeetings.meetings) {
                         <tr>
                             <td>@meeting.timeLabel</td>
-                            <td><button data-time="" data-id="" data-sponsor="@Model.sponsor.id" class="btn btn-primary register-meeting">Available</button></td>
+                            @if (meeting.available) {
+                                <td><button data-time="@meeting.timeLabel" data-id="@meeting.id" data-sponsor="@Model.sponsor.id" class="btn btn-primary register-meeting">Available</button></td>
+                            } else {
+                                <td><button class="btn btn-default">Unavailable</button></td>
+                            }
                         </tr>
                         }
                     </tbody>
@@ -63,7 +67,7 @@
                 <h4 class="modal-title">Request this time</h4>
             </div>
             <form id="frmSaveRegistrant" method="post" action="@Url.Action("SaveRegistrant", "Meetings")">
-                <input type="hidden" name="id" id="meetingID" value="" />
+                <input type="hidden" name="meetingID" id="meetingID" value="" />
                 <input type="hidden" name="sponsorID" id="sponsorID" value="@Model.sponsor.id" />
 
                 <div class="modal-body">

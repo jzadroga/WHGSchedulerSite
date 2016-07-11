@@ -7,15 +7,6 @@
       <Association Name="component_status" Member="status" ThisKey="componentID" OtherKey="componentID" Type="status" />
     </Type>
   </Table>
-  <Table Name="dbo.userRole" Member="userRoles">
-    <Type Name="userRole">
-      <Column Name="userRoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="role" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="userID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="userRole_user" Member="users" ThisKey="userRoleID" OtherKey="roleID" Type="user" />
-      <Association Name="user_userRole" Member="user" ThisKey="userID" OtherKey="userID" Type="user" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.sponsor" Member="sponsors">
     <Type Name="sponsor">
       <Column Name="sponsorID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -37,25 +28,9 @@
       <Column Name="statusName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="componentID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="status_sponsor" Member="sponsors" ThisKey="statusID" OtherKey="statusID" Type="sponsor" />
-      <Association Name="status_user" Member="users" ThisKey="statusID" OtherKey="statusID" Type="user" />
       <Association Name="status_meeting" Member="meetings" ThisKey="statusID" OtherKey="statusID" Type="meeting" />
+      <Association Name="status_user" Member="users" ThisKey="statusID" OtherKey="statusID" Type="user" />
       <Association Name="component_status" Member="component" ThisKey="componentID" OtherKey="componentID" Type="component" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.[user]" Member="users">
-    <Type Name="user">
-      <Column Name="userID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
-      <Column Name="firstName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="lastName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="statusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="roleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="user_userRole" Member="userRoles" ThisKey="userID" OtherKey="userID" Type="userRole" />
-      <Association Name="user_meetingRequest" Member="meetingRequests" ThisKey="userID" OtherKey="userID" Type="meetingRequest" />
-      <Association Name="status_user" Member="status" ThisKey="statusID" OtherKey="statusID" Type="status" IsForeignKey="true" />
-      <Association Name="userRole_user" Member="userRole" ThisKey="roleID" OtherKey="userRoleID" Type="userRole" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.meeting" Member="meetings">
@@ -81,6 +56,35 @@
       <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="meeting_meetingRequest" Member="meeting" ThisKey="meetingID" OtherKey="meetingID" Type="meeting" IsForeignKey="true" />
       <Association Name="user_meetingRequest" Member="user" ThisKey="userID" OtherKey="userID" Type="user" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[user]" Member="users">
+    <Type Name="user">
+      <Column Name="userID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="firstName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="lastName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="statusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="roleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="attendeeType" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="brands" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="location" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="businessPhone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="mobilePhone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="user_meetingRequest" Member="meetingRequests" ThisKey="userID" OtherKey="userID" Type="meetingRequest" />
+      <Association Name="status_user" Member="status" ThisKey="statusID" OtherKey="statusID" Type="status" IsForeignKey="true" />
+      <Association Name="userRole_user" Member="userRole" ThisKey="roleID" OtherKey="userRoleID" Type="userRole" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.userRole" Member="userRoles">
+    <Type Name="userRole">
+      <Column Name="userRoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="role" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="userRole_user" Member="users" ThisKey="userRoleID" OtherKey="roleID" Type="user" />
     </Type>
   </Table>
 </Database>

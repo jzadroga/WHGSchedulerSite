@@ -26,7 +26,7 @@
                 <td>
                     <button data-requests="@meeting.requests" data-start="@meeting.startDate" data-end="@meeting.endDate" data-id="@meeting.id" class="btn btn-default edit-meeting">Edit</button>
                     <a href="@Url.Action("DeleteMeeting", "ControlPanel", new { id = @meeting.id, sponsor = @meeting.sponsorID })" class="btn btn-danger">Delete</a>
-                    <a href="" class="btn btn-warning">Registrants</a>
+                    <a href="@Url.Action("Registrants", "ControlPanel", new { meetingID = @meeting.id })" class="btn btn-warning">Registrants</a>
                 </td>
             </tr>
         }

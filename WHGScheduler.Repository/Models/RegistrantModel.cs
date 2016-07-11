@@ -20,5 +20,6 @@ namespace WHGScheduler.Repository.Models
         public string bizphone { get; set; }
         public string mobilephone { get; set; }
         public string comments { get; set; }
+        public int meetingID { get; set; }
     }
 }

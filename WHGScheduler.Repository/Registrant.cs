@@ -10,48 +10,41 @@ namespace WHGScheduler.Repository
 {
     public class Registrant
     {
-        public static List<SponsorModel> GetList(bool activeOnly)
+       
+        public static List<RegistrantModel> GetListByMeeting(int meetingID)
         {
-            var sponsorList = sponsor.GetList(activeOnly);
+            var registrantList = user.GetListByMeeting(meetingID);
 
-            return sponsorList.Select( sp => new SponsorModel()
+            return registrantList.Select(reg => new RegistrantModel()
             {
-                id = sp.sponsorID,
-                description = sp.description,
-                logoImage = sp.logoImage,
-                name = sp.name,
-                url = sp.websiteUrl
+                id = reg.userID,
+                firstname = reg.firstName,
+                lastname = reg.lastName,
+                email = reg.email,
+                attendeetype = reg.attendeeType,
+                brands = reg.brands,
+                title = reg.title,
+                location = reg.location,
+                bizphone = reg.businessPhone,
+                mobilephone = reg.mobilePhone,
+                comments = reg.comments
             }).ToList();
-        }
-
-        public static SponsorModel GetByID(int sponsorID)
-        {
-            var sponsorObj = sponsor.Get(sponsorID);
-
-            return (sponsorObj == null) ? new SponsorModel() : new SponsorModel()
-            {
-                id = sponsorObj.sponsorID,
-                description = sponsorObj.description,
-                logoImage = sponsorObj.logoImage,
-                name = sponsorObj.name,
-                url = sponsorObj.websiteUrl
-            };
         }
 
         public static void Save(RegistrantModel obj)
         {
-            /*sponsor.Save( new sponsor(){
-                name = obj.name,
-                sponsorID = obj.id,
-                logoImage = obj.logoImage,
-                websiteUrl = obj.url,
-                description = obj.description
-            });*/
-        }
-
-        public static void Delete(int sponsorID)
-        {
-            sponsor.Delete(sponsorID);
+            user.SaveRegistrant( new user(){
+                email = obj.email,
+                firstName = obj.firstname,
+                lastName = obj.lastname,
+                attendeeType = obj.attendeetype,
+                brands = obj.brands,
+                title = obj.title,
+                location = obj.location,
+                businessPhone = obj.bizphone,
+                mobilePhone = obj.mobilephone,
+                comments = obj.comments
+            }, obj.meetingID);
         }
     }
 }

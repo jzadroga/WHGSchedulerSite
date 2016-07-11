@@ -1,0 +1,42 @@
+﻿@model WHGSchedulerSite.ViewModels.RegistrantsViewModel
+
+@{
+    ViewBag.Title = "Registrants";
+    Layout = "~/Views/Shared/_ControlPanelLayout.cshtml";
+}
+
+<h3>REgistrants</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Attendee Type</th>
+            <th>Brands</th>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Bus. #</th>
+            <th>Mobile #</th>
+            <th>Reason</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reg in Model.registrants)
+        {
+            <tr>
+                <td>@reg.firstname</td>
+                <td>@reg.lastname</td>
+                <td>@reg.email</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>

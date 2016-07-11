@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="meeting.cs" />
+    <Compile Include="userRole.cs" />
     <Compile Include="status.cs" />
     <Compile Include="user.cs" />
     <Compile Include="sponsor.cs" />
