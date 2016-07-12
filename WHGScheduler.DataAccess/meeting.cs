@@ -38,7 +38,7 @@ namespace WHGScheduler.DataAccess
                             .Select(( ds, ind ) => new MeetingsByDay
                             {
                                 Day = ind + 1,
-                                Meetings = ds.ToList()
+                                Meetings = ds.OrderBy(mt => mt.startDate).ToList()
                             }).ToList();
         }
 
