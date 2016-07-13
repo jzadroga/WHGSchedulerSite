@@ -45,6 +45,9 @@ namespace WHGScheduler.Repository
                 mobilePhone = obj.mobilephone,
                 comments = obj.comments
             }, obj.meetingID);
+
+            //send a confirmation email
+
         }
     }
 }
