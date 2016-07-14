@@ -56,5 +56,19 @@ namespace WHGScheduler.Repository
         {
             meeting.Delete(meetingID);
         }
+
+        public static MeetingModel GetByID(int meetingID)
+        {
+            var meetingObj = meeting.Get(meetingID);
+            return new MeetingModel()
+            {
+                sponserName = meetingObj.sponsor.name,
+                id = meetingObj.meetingID,
+                startDate = meetingObj.startDate,
+                endDate = meetingObj.endDate,
+                available = (meetingObj.availableRequests > meetingObj.registrants) ? true : false,
+                timeLabel = meetingObj.startDate.ToShortTimeString().ToLower() + " - " + meetingObj.endDate.ToShortTimeString().ToLower()
+            };
+        }
     }
 }

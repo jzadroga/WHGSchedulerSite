@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using WHGScheduler.DataAccess;
@@ -47,7 +49,39 @@ namespace WHGScheduler.Repository
             }, obj.meetingID);
 
             //send a confirmation email
+            sendRegistrationEmail(obj);
+        }
 
+        private static void sendRegistrationEmail(RegistrantModel registrant)
+        {
+            try
+            {
+                var meeting = Meeting.GetByID(registrant.meetingID);
+
+                MailMessage mail = new MailMessage();
+
+                mail.From = new MailAddress("2016whgscheduler@gmail.com", "2016 WHG Scheduler");
+                mail.To.Add(new MailAddress(registrant.email));
+
+                SmtpClient client = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(mail.From.Address, "@whgscheduler")
+                };         
+
+                mail.Subject = "Registration Confirmation";
+                mail.Body = "Thank you for registering.  Your meeting time of " + meeting.timeLabel + " with " + meeting.sponserName + " is confirmed.";
+
+                client.Send(mail);
+            }
+            catch( Exception ex)
+            {
+                string failed = ex.Message;
+            }
         }
     }
 }

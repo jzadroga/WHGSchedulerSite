@@ -1,6 +1,6 @@
 ﻿@model WHGSchedulerSite.ViewModels.SponsorMeetingsViewModel
 
-<div class="row">
+<div class="row breadcrumb-link">
     <div class="col-md-12">
         <a href="@Url.Action("Index", "Home")"><< Back to Sponsor List</a>
     </div>
@@ -16,7 +16,6 @@
             </div>
             <div class="media-body">
                 <h4 class="media-heading">@Model.sponsor.name</h4> 
-                @Model.sponsor.description 
             </div>
         </div>
     </div>
