@@ -5,7 +5,8 @@
     Layout = "~/Views/Shared/_ControlPanelLayout.cshtml";
 }
 
-<h3>REgistrants</h3>
+<h3>Registrants for @Model.meeting.sponserName @Model.meeting.timeLabel</h3>
+<a href="@Url.Action("Meetings", "ControlPanel", new { id = @Model.meeting.sponsorID })"><< Back to @Model.meeting.sponserName Meeting List</a>
 
 <table class="table table-striped">
     <thead>
@@ -20,6 +21,7 @@
             <th>Bus. #</th>
             <th>Mobile #</th>
             <th>Reason</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -29,13 +31,14 @@
                 <td>@reg.firstname</td>
                 <td>@reg.lastname</td>
                 <td>@reg.email</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>@reg.attendeetype</td>
+                <td>@reg.brands</td>
+                <td>@reg.title</td>
+                <td>@reg.location</td>
+                <td>@reg.bizphone</td>
+                <td>@reg.mobilephone</td>
+                <td>@reg.comments</td>
+                <td><a href="@Url.Action("DeleteRegistrant", "ControlPanel", new { id = @reg.id, meetingID = @Model.meetingID })" class="btn btn-danger">Delete</a></td>
             </tr>
         }
     </tbody>

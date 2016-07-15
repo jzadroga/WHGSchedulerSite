@@ -12,7 +12,11 @@ namespace WHGScheduler.Repository
 {
     public class Registrant
     {
-       
+        public static void Delete(int registrantID)
+        {
+            user.Delete(registrantID);
+        }
+
         public static List<RegistrantModel> GetListByMeeting(int meetingID)
         {
             var registrantList = user.GetListByMeeting(meetingID);

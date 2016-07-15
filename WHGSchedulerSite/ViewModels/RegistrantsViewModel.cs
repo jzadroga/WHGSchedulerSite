@@ -10,5 +10,7 @@ namespace WHGSchedulerSite.ViewModels
     public class RegistrantsViewModel
     {
         public List<RegistrantModel> registrants { get; set; }
+        public int meetingID { get; set; }
+        public MeetingModel meeting { get; set; }
     }
 }

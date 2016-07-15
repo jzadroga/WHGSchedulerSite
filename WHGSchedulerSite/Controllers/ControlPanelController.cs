@@ -41,8 +41,17 @@ namespace WHGSchedulerSite.Controllers
         {
             return View( new RegistrantsViewModel()
             {
-                registrants = Registrant.GetListByMeeting(meetingID)
+                registrants = Registrant.GetListByMeeting(meetingID),
+                meetingID = meetingID,
+                meeting = Meeting.GetByID(meetingID)
             });
+        }
+
+        public ActionResult DeleteRegistrant(int id, int meetingID)
+        {
+            Registrant.Delete(id);
+
+            return RedirectToAction("Registrants", "ControlPanel", new { meetingID = meetingID });
         }
 
         public ActionResult Meetings(int id)

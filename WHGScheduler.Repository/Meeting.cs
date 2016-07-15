@@ -62,6 +62,7 @@ namespace WHGScheduler.Repository
             var meetingObj = meeting.Get(meetingID);
             return new MeetingModel()
             {
+                sponsorID = meetingObj.sponsor.sponsorID,
                 sponserName = meetingObj.sponsor.name,
                 id = meetingObj.meetingID,
                 startDate = meetingObj.startDate,

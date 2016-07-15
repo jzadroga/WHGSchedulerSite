@@ -53,5 +53,16 @@ namespace WHGScheduler.DataAccess
             context.meetingRequests.InsertOnSubmit(request);
             context.SubmitChanges();
         }
+
+        public static void Delete(int userID)
+        {
+            WHGSchedulerDBDataContext context = new WHGSchedulerDBDataContext();
+
+            var deleteUser = context.users.Where(ur => ur.userID == userID).FirstOrDefault();
+            deleteUser.statusID = status.GetDeleteStatus("user");
+
+            context.SubmitChanges();
+        }
+
     }
 }
