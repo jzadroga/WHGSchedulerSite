@@ -62,6 +62,7 @@ namespace WHGScheduler.Repository
 
                 mail.From = new MailAddress("2016whgscheduler@gmail.com", "2016 WHG Scheduler");
                 mail.To.Add(new MailAddress(registrant.email));
+                mail.CC.Add(new MailAddress("bert@onyxmeetings.com"));
 
                 SmtpClient client = new SmtpClient
                 {
@@ -74,7 +75,7 @@ namespace WHGScheduler.Repository
                 };         
 
                 mail.Subject = "Registration Confirmation";
-                mail.Body = "Thank you for registering.  Your meeting time of " + meeting.timeLabel + " with " + meeting.sponserName + " is confirmed.";
+                mail.Body = "Thank you for registering.  Your meeting time on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + " with " + meeting.sponserName + " is confirmed.";
 
                 client.Send(mail);
             }

@@ -84,6 +84,36 @@ namespace WHGScheduler.DataAccess
 
             context.SubmitChanges();
         }
+
+        public static void CreateDefaultList()
+        {
+            WHGSchedulerDBDataContext context = new WHGSchedulerDBDataContext();
+
+            var sponsors = context.sponsors.Where(sp => sp.status.statusName == "active").ToList();
+            var defaultSponsor = sponsors.Where(sp => sp.name == "1888 MIlls").FirstOrDefault();
+
+            foreach (sponsor sp in sponsors)
+            {
+                if (sp.name == "1888 MIlls")
+                    continue;
+
+                foreach(meeting mt in defaultSponsor.meetings)
+                {
+                    meeting defaultMt = new meeting();
+
+                    defaultMt.startDate = mt.startDate;
+                    defaultMt.endDate = mt.endDate;
+                    defaultMt.availableRequests = mt.availableRequests;
+                    defaultMt.sponsorID = sp.sponsorID;
+                    defaultMt.dateCreated = DateTime.Now;
+                    defaultMt.statusID = mt.statusID;
+
+                    context.meetings.InsertOnSubmit(defaultMt);
+                }
+
+                context.SubmitChanges();
+            }
+        }
     }
 
     public class MeetingsByDay

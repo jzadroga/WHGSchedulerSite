@@ -70,5 +70,10 @@ namespace WHGScheduler.Repository
                 timeLabel = meetingObj.startDate.ToShortTimeString().ToLower() + " - " + meetingObj.endDate.ToShortTimeString().ToLower()
             };
         }
+
+        public static void CreateDefaultList()
+        {
+            meeting.CreateDefaultList();
+        }
     }
 }

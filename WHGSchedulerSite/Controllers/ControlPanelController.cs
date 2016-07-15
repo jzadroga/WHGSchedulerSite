@@ -54,6 +54,13 @@ namespace WHGSchedulerSite.Controllers
             });
         }
 
+        public ActionResult CreateDefaultMeetings()
+        {
+            Meeting.CreateDefaultList();
+
+            return RedirectToAction("Index", "ControlPanel");
+        }
+
         [HttpPost]
         public ActionResult SaveSponsor(SponsorModel sponsor, HttpPostedFileBase logoFile)
         {
