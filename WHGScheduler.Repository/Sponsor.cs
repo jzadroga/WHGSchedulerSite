@@ -20,7 +20,8 @@ namespace WHGScheduler.Repository
                 description = sp.description,
                 logoImage = sp.logoImage,
                 name = sp.name,
-                url = sp.websiteUrl
+                url = sp.websiteUrl,
+                email = sp.email
             }).ToList();
         }
 
@@ -45,7 +46,8 @@ namespace WHGScheduler.Repository
                 sponsorID = obj.id,
                 logoImage = obj.logoImage,
                 websiteUrl = obj.url,
-                description = obj.description
+                description = obj.description,
+                email = obj.email
             });
         }
 

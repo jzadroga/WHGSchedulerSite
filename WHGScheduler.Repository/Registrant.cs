@@ -79,7 +79,7 @@ namespace WHGScheduler.Repository
                 };         
 
                 mail.Subject = "Registration Confirmation";
-                mail.Body = "Thank you for registering.  Your meeting time on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + " with " + meeting.sponserName + " is confirmed.";
+                mail.Body = "Thank you for scheduling an appointment.  Your meeting time on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + " with " + meeting.sponserName + " is confirmed.  Your meeting will take place on the Trade Show floor in the sponsor’s booth.To modify or cancel your appointment, please contact XXXXXXXXXX.";
 
                 client.Send(mail);
             }

@@ -13,5 +13,6 @@ namespace WHGScheduler.Repository.Models
         public string description { get; set; }
         public int id { get; set; }
         public string url { get; set; }
+        public string email { get; set; }
     }
 }

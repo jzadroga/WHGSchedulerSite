@@ -3,14 +3,15 @@
     $('#save-meeting-registrant').click(function () {
         var $registerFrm = $('#frmSaveRegistrant');
         
-        // Send the data using post
-        var posting = $.post($registerFrm.attr('action'), $registerFrm.serialize());
+        if (isValid($registerFrm)) {
+            // Send the data using post
+            var posting = $.post($registerFrm.attr('action'), $registerFrm.serialize());
 
-        posting.done(function (data) {
-            $('#frmSaveRegistrant').hide();
-            $('#confirmView').show();
-            console.log(data);
-        });
+            posting.done(function (data) {
+                $('#frmSaveRegistrant').hide();
+                $('#confirmView').show();
+            });
+        }
 
         return false;
     });
@@ -28,3 +29,17 @@
         return false;
     });
 });
+
+function isValid($form) {
+    var valid = true;
+    $form.find('div.form-group').removeClass('has-error');
+
+    $(".required").each(function () {
+        if (!$.trim($(this).val())) {
+            $(this).parent('div.form-group').addClass('has-error');
+            valid = false;
+        }
+    });
+
+    return valid;
+}

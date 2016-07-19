@@ -33,9 +33,6 @@ namespace WHGScheduler.DataAccess
     partial void Insertcomponent(component instance);
     partial void Updatecomponent(component instance);
     partial void Deletecomponent(component instance);
-    partial void Insertsponsor(sponsor instance);
-    partial void Updatesponsor(sponsor instance);
-    partial void Deletesponsor(sponsor instance);
     partial void Insertstatus(status instance);
     partial void Updatestatus(status instance);
     partial void Deletestatus(status instance);
@@ -51,6 +48,9 @@ namespace WHGScheduler.DataAccess
     partial void InsertuserRole(userRole instance);
     partial void UpdateuserRole(userRole instance);
     partial void DeleteuserRole(userRole instance);
+    partial void Insertsponsor(sponsor instance);
+    partial void Updatesponsor(sponsor instance);
+    partial void Deletesponsor(sponsor instance);
     #endregion
 		
 		public WHGSchedulerDBDataContext() : 
@@ -91,14 +91,6 @@ namespace WHGScheduler.DataAccess
 			}
 		}
 		
-		public System.Data.Linq.Table<sponsor> sponsors
-		{
-			get
-			{
-				return this.GetTable<sponsor>();
-			}
-		}
-		
 		public System.Data.Linq.Table<status> status
 		{
 			get
@@ -136,6 +128,14 @@ namespace WHGScheduler.DataAccess
 			get
 			{
 				return this.GetTable<userRole>();
+			}
+		}
+		
+		public System.Data.Linq.Table<sponsor> sponsors
+		{
+			get
+			{
+				return this.GetTable<sponsor>();
 			}
 		}
 	}
@@ -254,329 +254,6 @@ namespace WHGScheduler.DataAccess
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.sponsor")]
-	public partial class sponsor : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _sponsorID;
-		
-		private string _name;
-		
-		private string _logoImage;
-		
-		private string _title;
-		
-		private string _description;
-		
-		private int _statusID;
-		
-		private System.DateTime _dateCreated;
-		
-		private System.DateTime _dateModified;
-		
-		private string _websiteUrl;
-		
-		private EntitySet<meeting> _meetings;
-		
-		private EntityRef<status> _status;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnsponsorIDChanging(int value);
-    partial void OnsponsorIDChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OnlogoImageChanging(string value);
-    partial void OnlogoImageChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void OndescriptionChanging(string value);
-    partial void OndescriptionChanged();
-    partial void OnstatusIDChanging(int value);
-    partial void OnstatusIDChanged();
-    partial void OndateCreatedChanging(System.DateTime value);
-    partial void OndateCreatedChanged();
-    partial void OndateModifiedChanging(System.DateTime value);
-    partial void OndateModifiedChanged();
-    partial void OnwebsiteUrlChanging(string value);
-    partial void OnwebsiteUrlChanged();
-    #endregion
-		
-		public sponsor()
-		{
-			this._meetings = new EntitySet<meeting>(new Action<meeting>(this.attach_meetings), new Action<meeting>(this.detach_meetings));
-			this._status = default(EntityRef<status>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sponsorID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int sponsorID
-		{
-			get
-			{
-				return this._sponsorID;
-			}
-			set
-			{
-				if ((this._sponsorID != value))
-				{
-					this.OnsponsorIDChanging(value);
-					this.SendPropertyChanging();
-					this._sponsorID = value;
-					this.SendPropertyChanged("sponsorID");
-					this.OnsponsorIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this.OnnameChanging(value);
-					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_logoImage", DbType="NVarChar(250)")]
-		public string logoImage
-		{
-			get
-			{
-				return this._logoImage;
-			}
-			set
-			{
-				if ((this._logoImage != value))
-				{
-					this.OnlogoImageChanging(value);
-					this.SendPropertyChanging();
-					this._logoImage = value;
-					this.SendPropertyChanged("logoImage");
-					this.OnlogoImageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(250)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this.OntitleChanging(value);
-					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(MAX)")]
-		public string description
-		{
-			get
-			{
-				return this._description;
-			}
-			set
-			{
-				if ((this._description != value))
-				{
-					this.OndescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._description = value;
-					this.SendPropertyChanged("description");
-					this.OndescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_statusID", DbType="Int NOT NULL")]
-		public int statusID
-		{
-			get
-			{
-				return this._statusID;
-			}
-			set
-			{
-				if ((this._statusID != value))
-				{
-					if (this._status.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnstatusIDChanging(value);
-					this.SendPropertyChanging();
-					this._statusID = value;
-					this.SendPropertyChanged("statusID");
-					this.OnstatusIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateCreated", DbType="DateTime NOT NULL")]
-		public System.DateTime dateCreated
-		{
-			get
-			{
-				return this._dateCreated;
-			}
-			set
-			{
-				if ((this._dateCreated != value))
-				{
-					this.OndateCreatedChanging(value);
-					this.SendPropertyChanging();
-					this._dateCreated = value;
-					this.SendPropertyChanged("dateCreated");
-					this.OndateCreatedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateModified", DbType="DateTime NOT NULL")]
-		public System.DateTime dateModified
-		{
-			get
-			{
-				return this._dateModified;
-			}
-			set
-			{
-				if ((this._dateModified != value))
-				{
-					this.OndateModifiedChanging(value);
-					this.SendPropertyChanging();
-					this._dateModified = value;
-					this.SendPropertyChanged("dateModified");
-					this.OndateModifiedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_websiteUrl", DbType="NVarChar(250)")]
-		public string websiteUrl
-		{
-			get
-			{
-				return this._websiteUrl;
-			}
-			set
-			{
-				if ((this._websiteUrl != value))
-				{
-					this.OnwebsiteUrlChanging(value);
-					this.SendPropertyChanging();
-					this._websiteUrl = value;
-					this.SendPropertyChanged("websiteUrl");
-					this.OnwebsiteUrlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="sponsor_meeting", Storage="_meetings", ThisKey="sponsorID", OtherKey="sponsorID")]
-		public EntitySet<meeting> meetings
-		{
-			get
-			{
-				return this._meetings;
-			}
-			set
-			{
-				this._meetings.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="status_sponsor", Storage="_status", ThisKey="statusID", OtherKey="statusID", IsForeignKey=true)]
-		public status status
-		{
-			get
-			{
-				return this._status.Entity;
-			}
-			set
-			{
-				status previousValue = this._status.Entity;
-				if (((previousValue != value) 
-							|| (this._status.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._status.Entity = null;
-						previousValue.sponsors.Remove(this);
-					}
-					this._status.Entity = value;
-					if ((value != null))
-					{
-						value.sponsors.Add(this);
-						this._statusID = value.statusID;
-					}
-					else
-					{
-						this._statusID = default(int);
-					}
-					this.SendPropertyChanged("status");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_meetings(meeting entity)
-		{
-			this.SendPropertyChanging();
-			entity.sponsor = this;
-		}
-		
-		private void detach_meetings(meeting entity)
-		{
-			this.SendPropertyChanging();
-			entity.sponsor = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.status")]
 	public partial class status : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -589,11 +266,11 @@ namespace WHGScheduler.DataAccess
 		
 		private int _componentID;
 		
-		private EntitySet<sponsor> _sponsors;
-		
 		private EntitySet<meeting> _meetings;
 		
 		private EntitySet<user> _users;
+		
+		private EntitySet<sponsor> _sponsors;
 		
 		private EntityRef<component> _component;
 		
@@ -611,9 +288,9 @@ namespace WHGScheduler.DataAccess
 		
 		public status()
 		{
-			this._sponsors = new EntitySet<sponsor>(new Action<sponsor>(this.attach_sponsors), new Action<sponsor>(this.detach_sponsors));
 			this._meetings = new EntitySet<meeting>(new Action<meeting>(this.attach_meetings), new Action<meeting>(this.detach_meetings));
 			this._users = new EntitySet<user>(new Action<user>(this.attach_users), new Action<user>(this.detach_users));
+			this._sponsors = new EntitySet<sponsor>(new Action<sponsor>(this.attach_sponsors), new Action<sponsor>(this.detach_sponsors));
 			this._component = default(EntityRef<component>);
 			OnCreated();
 		}
@@ -682,19 +359,6 @@ namespace WHGScheduler.DataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="status_sponsor", Storage="_sponsors", ThisKey="statusID", OtherKey="statusID")]
-		public EntitySet<sponsor> sponsors
-		{
-			get
-			{
-				return this._sponsors;
-			}
-			set
-			{
-				this._sponsors.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="status_meeting", Storage="_meetings", ThisKey="statusID", OtherKey="statusID")]
 		public EntitySet<meeting> meetings
 		{
@@ -718,6 +382,19 @@ namespace WHGScheduler.DataAccess
 			set
 			{
 				this._users.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="status_sponsor", Storage="_sponsors", ThisKey="statusID", OtherKey="statusID")]
+		public EntitySet<sponsor> sponsors
+		{
+			get
+			{
+				return this._sponsors;
+			}
+			set
+			{
+				this._sponsors.Assign(value);
 			}
 		}
 		
@@ -775,18 +452,6 @@ namespace WHGScheduler.DataAccess
 			}
 		}
 		
-		private void attach_sponsors(sponsor entity)
-		{
-			this.SendPropertyChanging();
-			entity.status = this;
-		}
-		
-		private void detach_sponsors(sponsor entity)
-		{
-			this.SendPropertyChanging();
-			entity.status = null;
-		}
-		
 		private void attach_meetings(meeting entity)
 		{
 			this.SendPropertyChanging();
@@ -806,6 +471,18 @@ namespace WHGScheduler.DataAccess
 		}
 		
 		private void detach_users(user entity)
+		{
+			this.SendPropertyChanging();
+			entity.status = null;
+		}
+		
+		private void attach_sponsors(sponsor entity)
+		{
+			this.SendPropertyChanging();
+			entity.status = this;
+		}
+		
+		private void detach_sponsors(sponsor entity)
 		{
 			this.SendPropertyChanging();
 			entity.status = null;
@@ -836,9 +513,9 @@ namespace WHGScheduler.DataAccess
 		
 		private EntitySet<meetingRequest> _meetingRequests;
 		
-		private EntityRef<sponsor> _sponsor;
-		
 		private EntityRef<status> _status;
+		
+		private EntityRef<sponsor> _sponsor;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -865,8 +542,8 @@ namespace WHGScheduler.DataAccess
 		public meeting()
 		{
 			this._meetingRequests = new EntitySet<meetingRequest>(new Action<meetingRequest>(this.attach_meetingRequests), new Action<meetingRequest>(this.detach_meetingRequests));
-			this._sponsor = default(EntityRef<sponsor>);
 			this._status = default(EntityRef<status>);
+			this._sponsor = default(EntityRef<sponsor>);
 			OnCreated();
 		}
 		
@@ -1051,40 +728,6 @@ namespace WHGScheduler.DataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="sponsor_meeting", Storage="_sponsor", ThisKey="sponsorID", OtherKey="sponsorID", IsForeignKey=true)]
-		public sponsor sponsor
-		{
-			get
-			{
-				return this._sponsor.Entity;
-			}
-			set
-			{
-				sponsor previousValue = this._sponsor.Entity;
-				if (((previousValue != value) 
-							|| (this._sponsor.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._sponsor.Entity = null;
-						previousValue.meetings.Remove(this);
-					}
-					this._sponsor.Entity = value;
-					if ((value != null))
-					{
-						value.meetings.Add(this);
-						this._sponsorID = value.sponsorID;
-					}
-					else
-					{
-						this._sponsorID = default(int);
-					}
-					this.SendPropertyChanged("sponsor");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="status_meeting", Storage="_status", ThisKey="statusID", OtherKey="statusID", IsForeignKey=true)]
 		public status status
 		{
@@ -1115,6 +758,40 @@ namespace WHGScheduler.DataAccess
 						this._statusID = default(int);
 					}
 					this.SendPropertyChanged("status");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="sponsor_meeting", Storage="_sponsor", ThisKey="sponsorID", OtherKey="sponsorID", IsForeignKey=true)]
+		public sponsor sponsor
+		{
+			get
+			{
+				return this._sponsor.Entity;
+			}
+			set
+			{
+				sponsor previousValue = this._sponsor.Entity;
+				if (((previousValue != value) 
+							|| (this._sponsor.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._sponsor.Entity = null;
+						previousValue.meetings.Remove(this);
+					}
+					this._sponsor.Entity = value;
+					if ((value != null))
+					{
+						value.meetings.Add(this);
+						this._sponsorID = value.sponsorID;
+					}
+					else
+					{
+						this._sponsorID = default(int);
+					}
+					this.SendPropertyChanged("sponsor");
 				}
 			}
 		}
@@ -1987,6 +1664,353 @@ namespace WHGScheduler.DataAccess
 		{
 			this.SendPropertyChanging();
 			entity.userRole = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.sponsor")]
+	public partial class sponsor : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _sponsorID;
+		
+		private string _name;
+		
+		private string _logoImage;
+		
+		private string _title;
+		
+		private string _description;
+		
+		private int _statusID;
+		
+		private System.DateTime _dateCreated;
+		
+		private System.DateTime _dateModified;
+		
+		private string _websiteUrl;
+		
+		private string _email;
+		
+		private EntitySet<meeting> _meetings;
+		
+		private EntityRef<status> _status;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnsponsorIDChanging(int value);
+    partial void OnsponsorIDChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnlogoImageChanging(string value);
+    partial void OnlogoImageChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    partial void OnstatusIDChanging(int value);
+    partial void OnstatusIDChanged();
+    partial void OndateCreatedChanging(System.DateTime value);
+    partial void OndateCreatedChanged();
+    partial void OndateModifiedChanging(System.DateTime value);
+    partial void OndateModifiedChanged();
+    partial void OnwebsiteUrlChanging(string value);
+    partial void OnwebsiteUrlChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    #endregion
+		
+		public sponsor()
+		{
+			this._meetings = new EntitySet<meeting>(new Action<meeting>(this.attach_meetings), new Action<meeting>(this.detach_meetings));
+			this._status = default(EntityRef<status>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sponsorID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int sponsorID
+		{
+			get
+			{
+				return this._sponsorID;
+			}
+			set
+			{
+				if ((this._sponsorID != value))
+				{
+					this.OnsponsorIDChanging(value);
+					this.SendPropertyChanging();
+					this._sponsorID = value;
+					this.SendPropertyChanged("sponsorID");
+					this.OnsponsorIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_logoImage", DbType="NVarChar(250)")]
+		public string logoImage
+		{
+			get
+			{
+				return this._logoImage;
+			}
+			set
+			{
+				if ((this._logoImage != value))
+				{
+					this.OnlogoImageChanging(value);
+					this.SendPropertyChanging();
+					this._logoImage = value;
+					this.SendPropertyChanged("logoImage");
+					this.OnlogoImageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(250)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(MAX)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this.OndescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._description = value;
+					this.SendPropertyChanged("description");
+					this.OndescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_statusID", DbType="Int NOT NULL")]
+		public int statusID
+		{
+			get
+			{
+				return this._statusID;
+			}
+			set
+			{
+				if ((this._statusID != value))
+				{
+					if (this._status.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnstatusIDChanging(value);
+					this.SendPropertyChanging();
+					this._statusID = value;
+					this.SendPropertyChanged("statusID");
+					this.OnstatusIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateCreated", DbType="DateTime NOT NULL")]
+		public System.DateTime dateCreated
+		{
+			get
+			{
+				return this._dateCreated;
+			}
+			set
+			{
+				if ((this._dateCreated != value))
+				{
+					this.OndateCreatedChanging(value);
+					this.SendPropertyChanging();
+					this._dateCreated = value;
+					this.SendPropertyChanged("dateCreated");
+					this.OndateCreatedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateModified", DbType="DateTime NOT NULL")]
+		public System.DateTime dateModified
+		{
+			get
+			{
+				return this._dateModified;
+			}
+			set
+			{
+				if ((this._dateModified != value))
+				{
+					this.OndateModifiedChanging(value);
+					this.SendPropertyChanging();
+					this._dateModified = value;
+					this.SendPropertyChanged("dateModified");
+					this.OndateModifiedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_websiteUrl", DbType="NVarChar(250)")]
+		public string websiteUrl
+		{
+			get
+			{
+				return this._websiteUrl;
+			}
+			set
+			{
+				if ((this._websiteUrl != value))
+				{
+					this.OnwebsiteUrlChanging(value);
+					this.SendPropertyChanging();
+					this._websiteUrl = value;
+					this.SendPropertyChanged("websiteUrl");
+					this.OnwebsiteUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NVarChar(MAX)")]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="sponsor_meeting", Storage="_meetings", ThisKey="sponsorID", OtherKey="sponsorID")]
+		public EntitySet<meeting> meetings
+		{
+			get
+			{
+				return this._meetings;
+			}
+			set
+			{
+				this._meetings.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="status_sponsor", Storage="_status", ThisKey="statusID", OtherKey="statusID", IsForeignKey=true)]
+		public status status
+		{
+			get
+			{
+				return this._status.Entity;
+			}
+			set
+			{
+				status previousValue = this._status.Entity;
+				if (((previousValue != value) 
+							|| (this._status.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._status.Entity = null;
+						previousValue.sponsors.Remove(this);
+					}
+					this._status.Entity = value;
+					if ((value != null))
+					{
+						value.sponsors.Add(this);
+						this._statusID = value.statusID;
+					}
+					else
+					{
+						this._statusID = default(int);
+					}
+					this.SendPropertyChanged("status");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_meetings(meeting entity)
+		{
+			this.SendPropertyChanging();
+			entity.sponsor = this;
+		}
+		
+		private void detach_meetings(meeting entity)
+		{
+			this.SendPropertyChanging();
+			entity.sponsor = null;
 		}
 	}
 }

@@ -44,6 +44,7 @@ namespace WHGScheduler.DataAccess
                 if(updateSponsor != null)
                 {
                     updateSponsor.name = sponsorObj.name;
+                    updateSponsor.email = sponsorObj.email;
                     updateSponsor.logoImage = sponsorObj.logoImage;
                     updateSponsor.websiteUrl = sponsorObj.websiteUrl;
                     updateSponsor.description = sponsorObj.description;

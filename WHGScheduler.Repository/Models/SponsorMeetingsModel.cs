@@ -9,6 +9,7 @@ namespace WHGScheduler.Repository.Models
     public class SponsorMeetingsModel
     {
         public int day { get; set; }
+        public string startDay { get; set; }
         public List<MeetingModel> meetings {get; set;}
     }
 }
