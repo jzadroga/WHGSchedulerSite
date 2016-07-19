@@ -79,7 +79,16 @@ namespace WHGScheduler.Repository
                 };         
 
                 mail.Subject = "Registration Confirmation";
-                mail.Body = "Thank you for scheduling an appointment.  Your meeting time on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + " with " + meeting.sponserName + " is confirmed.  Your meeting will take place on the Trade Show floor in the sponsor’s booth.To modify or cancel your appointment, please contact XXXXXXXXXX.";
+
+                //build out confirm email
+                string msgBody = "Thank you for scheduling an appointment at 2016 Global Conference.  Your meeting time on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + " with " + meeting.sponserName + " is confirmed. Your meeting will take place on the Trade Show floor in the sponsor’s booth in Bayside CD at the Mandalay Bay Convention Center.  To modify or cancel your appointment, please contact XXXXXXXXXX.";
+                string msgLink = "For more conference information, please visit http://www.2016whgglobalconference.com/";
+
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(msgBody);
+                sb.AppendLine();
+                sb.AppendLine(msgLink);
+                mail.Body = sb.ToString();  
 
                 client.Send(mail);
             }
