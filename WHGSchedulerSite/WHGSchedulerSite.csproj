@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\main.css" />
+    <Content Include="assets\img\clouds.png" />
     <Content Include="assets\img\header.png" />
     <Content Include="assets\img\logos\sample.png" />
     <Content Include="assets\js\controlPanel.js" />

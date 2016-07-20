@@ -1,4 +1,8 @@
 ﻿/*   Main Layout  */
+body.clouds{
+    background: #fff url('../img/clouds.png') no-repeat top left;
+}
+
 h1.title{
     margin-bottom: 20px;
 }
@@ -14,4 +18,13 @@ p.instructions{
 .breadcrumb-link{
     margin-top: 15px;
     margin-bottom: 18px;
+}
+
+div.header-img{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+div.container{
+    background-color: #fff;
 }
