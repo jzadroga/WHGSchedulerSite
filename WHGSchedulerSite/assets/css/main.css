@@ -1,6 +1,6 @@
 ﻿/*   Main Layout  */
 body.clouds{
-    background: #fff url('../img/clouds.png') no-repeat top left;
+    background: #fff url('../img/clouds.png') top right no-repeat; background-attachment:fixed;
 }
 
 h1.title{
@@ -25,6 +25,8 @@ div.header-img{
     padding-right: 0px;
 }
 
-div.container{
+div.content-background{
     background-color: #fff;
+    margin-left: 0px;
+    margin-right: 0px;
 }
