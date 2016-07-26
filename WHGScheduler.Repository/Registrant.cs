@@ -54,6 +54,7 @@ namespace WHGScheduler.Repository
 
             //send a confirmation email
             sendRegistrationEmail(obj);
+            //sendSponsorEmail(obj);
         }
 
         private static void sendRegistrationEmail(RegistrantModel registrant)
@@ -81,7 +82,7 @@ namespace WHGScheduler.Repository
                 mail.Subject = "Registration Confirmation";
 
                 //build out confirm email
-                string msgBody = "Thank you for scheduling an appointment at 2016 Global Conference.  Your meeting time on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + " with " + meeting.sponserName + " is confirmed. Your meeting will take place on the Trade Show floor in the sponsor’s booth in Bayside CD at the Mandalay Bay Convention Center.  To modify or cancel your appointment, please contact XXXXXXXXXX.";
+                string msgBody = "Thank you for scheduling an appointment at 2016 Global Conference.  Your meeting time on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + " with " + meeting.sponserName + " is confirmed. Your meeting will take place on the Trade Show floor in the sponsor’s booth in Bayside CD at the Mandalay Bay Convention Center.  To modify or cancel your appointment, please contact Bert Guy, bert@onyxmeetings.com.";
                 string msgLink = "For more conference information, please visit http://www.2016whgglobalconference.com/";
 
                 StringBuilder sb = new StringBuilder();
@@ -93,6 +94,63 @@ namespace WHGScheduler.Repository
                 client.Send(mail);
             }
             catch( Exception ex)
+            {
+                string failed = ex.Message;
+            }
+        }
+
+        private static void sendSponsorEmail(RegistrantModel registrant)
+        {
+            try
+            {
+                var sponsor = Sponsor.GetByID(registrant.sponsorID);
+                var meeting = Meeting.GetByID(registrant.meetingID);
+
+                MailMessage mail = new MailMessage();
+
+                mail.From = new MailAddress("2016whgscheduler@gmail.com", "2016 WHG Scheduler");
+                foreach (string email in sponsor.email.Split(';'))
+                {
+                    if (!string.IsNullOrEmpty(email.Trim()))
+                    {
+                        mail.To.Add(new MailAddress(email.Trim()));
+                    }
+                }
+                mail.CC.Add(new MailAddress("bert@onyxmeetings.com"));
+
+                SmtpClient client = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(mail.From.Address, "@whgscheduler")
+                };
+
+                mail.Subject = "Registration Confirmation";
+
+                //build out confirm email
+                string msgBody = "The following registrant is confirmed for an appointment at 2016 Global Conference, on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + ".";
+
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(msgBody);
+                sb.AppendLine();
+                sb.AppendLine("First Name: " + registrant.firstname);
+                sb.AppendLine("Last Name: " + registrant.lastname);
+                sb.AppendLine("Attendee Type: " + registrant.attendeetype);
+                sb.AppendLine("Brand(s): " + registrant.brands);
+                sb.AppendLine("Email: " + registrant.email);
+                sb.AppendLine("Location: " + registrant.location);
+                sb.AppendLine("Business Phone: " + registrant.bizphone);
+                sb.AppendLine("Mobile Phone: " + registrant.mobilephone);
+                sb.AppendLine("Please tell us why you would like to speak with us: " + registrant.comments);
+
+                mail.Body = sb.ToString();
+
+                client.Send(mail);
+            }
+            catch (Exception ex)
             {
                 string failed = ex.Message;
             }

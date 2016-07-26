@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using WHGScheduler.Repository;
 using WHGScheduler.Repository.Models;
 using WHGSchedulerSite.ViewModels;
@@ -92,6 +94,55 @@ namespace WHGSchedulerSite.Controllers
             Meeting.Save(meeting);
 
             return RedirectToAction("Meetings", "ControlPanel", new { id = meeting.sponsorID });
+        }
+
+        public ActionResult ExportRegistrants(int id)
+        {
+            var meetingsList = Meeting.GetList(id, true);
+
+            var products = new System.Data.DataTable("registrants");
+            products.Columns.Add("Meeting Date", typeof(string));
+            products.Columns.Add("Meeting Time", typeof(string));
+            products.Columns.Add("First Name", typeof(string));
+            products.Columns.Add("Last Name", typeof(string));
+            products.Columns.Add("Attendee Type", typeof(string));
+            products.Columns.Add("Brand(s)", typeof(string));
+            products.Columns.Add("Email", typeof(string));
+            products.Columns.Add("Location", typeof(string));
+            products.Columns.Add("Business Phone", typeof(string));
+            products.Columns.Add("Mobile Phone", typeof(string));
+            products.Columns.Add("Please tell us why you would like to speak with us", typeof(string));
+
+            foreach (var meeting in meetingsList)
+            {
+                var registrants = Registrant.GetListByMeeting(meeting.id);
+                foreach (var registrant in registrants)
+                {               
+                    products.Rows.Add(meeting.startDate.ToShortDateString(), meeting.timeLabel, registrant.firstname, registrant.lastname, registrant.attendeetype, 
+                        registrant.brands, registrant.email, registrant.location, registrant.bizphone, registrant.mobilephone, registrant.comments);                 
+                }
+            }
+
+            var grid = new GridView();
+            grid.DataSource = products;
+            grid.DataBind();
+
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=RegistrantList.xls");
+            Response.ContentType = "application/ms-excel";
+
+            Response.Charset = "";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+
+            grid.RenderControl(htw);
+
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+
+            return RedirectToAction("Meetings", "ControlPanel", new { id = id });
         }
     }
 }

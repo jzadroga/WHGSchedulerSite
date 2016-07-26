@@ -38,7 +38,8 @@ namespace WHGScheduler.Repository
                 sponsorID = mt.sponsorID,
                 startDate = mt.startDate,
                 endDate = mt.endDate,
-                requests = mt.availableRequests
+                requests = mt.availableRequests,
+                timeLabel = mt.startDate.ToShortTimeString().ToLower() + " - " + mt.endDate.ToShortTimeString().ToLower()
             }).ToList();
         }
 

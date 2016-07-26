@@ -35,7 +35,8 @@ namespace WHGScheduler.Repository
                 description = sponsorObj.description,
                 logoImage = sponsorObj.logoImage,
                 name = sponsorObj.name,
-                url = sponsorObj.websiteUrl
+                url = sponsorObj.websiteUrl,
+                email = sponsorObj.email
             };
         }
 
