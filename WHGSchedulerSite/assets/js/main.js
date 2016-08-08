@@ -10,6 +10,8 @@
             posting.done(function (data) {
                 $('#frmSaveRegistrant').hide();
                 $('#confirmView').show();
+                $('#request-hdr').hide();
+                $('#submit-hdr').show();
             });
         }
 
@@ -19,6 +21,8 @@
     $('.register-meeting').click(function () {
         $('#frmSaveRegistrant').show();
         $('#confirmView').hide();
+        $('#request-hdr').show();
+        $('#submit-hdr').hide();
 
         $('#frmSaveRegistrant .form-control').val('');
         $('#meetingID').val($(this).attr('data-id'));

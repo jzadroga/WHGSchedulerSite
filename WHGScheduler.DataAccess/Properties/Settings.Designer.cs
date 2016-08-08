@@ -33,5 +33,16 @@ namespace WHGScheduler.DataAccess.Properties {
                 return ((string)(this["WHGSchedulerConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=tckgvy6y8i.database.windows.net;Initial Catalog=WHGScheduler;User ID=" +
+            "WHGScheduler;Connect Timeout=60")]
+        public string WHGSchedulerConnectionString1 {
+            get {
+                return ((string)(this["WHGSchedulerConnectionString1"]));
+            }
+        }
     }
 }

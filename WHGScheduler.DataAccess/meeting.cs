@@ -15,7 +15,7 @@ namespace WHGScheduler.DataAccess
                 if (this.meetingRequests == null)
                     return 0;
 
-                return this.meetingRequests.Count();
+                return this.meetingRequests.Where(mr => mr.user.status.statusName == "active").Count();
             }
         }
 
