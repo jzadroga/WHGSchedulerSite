@@ -54,7 +54,7 @@ namespace WHGScheduler.Repository
 
             //send a confirmation email
             sendRegistrationEmail(obj);
-            //sendSponsorEmail(obj);
+            sendSponsorEmail(obj);
         }
 
         private static void sendRegistrationEmail(RegistrantModel registrant)
