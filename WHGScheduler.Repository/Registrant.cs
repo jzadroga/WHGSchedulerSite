@@ -65,7 +65,7 @@ namespace WHGScheduler.Repository
 
                 MailMessage mail = new MailMessage();
 
-                mail.From = new MailAddress("2016whgscheduler@gmail.com", "2016 WHG Scheduler");
+                mail.From = new MailAddress("2016whgscheduler@gmail.com", "2018 WHG Scheduler");
                 mail.To.Add(new MailAddress(registrant.email));
                 mail.CC.Add(new MailAddress("bert@onyxmeetings.com"));
 
@@ -82,7 +82,7 @@ namespace WHGScheduler.Repository
                 mail.Subject = "Registration Confirmation";
 
                 //build out confirm email
-                string msgBody = "Thank you for scheduling an appointment at 2016 Global Conference.  Your meeting time on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + " with " + meeting.sponserName + " is confirmed. Your meeting will take place on the Trade Show floor in the sponsor’s booth in Bayside CD at the Mandalay Bay Convention Center.  To modify or cancel your appointment, please contact Bert Guy, bert@onyxmeetings.com.";
+                string msgBody = "Thank you for scheduling an appointment at 2018 Global Conference.  Your meeting time on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + " with " + meeting.sponserName + " is confirmed. Your meeting will take place on the Trade Show floor in the sponsor’s booth in Bayside CD at the Mandalay Bay Convention Center.  To modify or cancel your appointment, please contact Bert Guy, bert@onyxmeetings.com.";
                 string msgLink = "For more conference information, please visit http://www.2016whgglobalconference.com/";
 
                 StringBuilder sb = new StringBuilder();
@@ -108,7 +108,7 @@ namespace WHGScheduler.Repository
 
                 MailMessage mail = new MailMessage();
 
-                mail.From = new MailAddress("2016whgscheduler@gmail.com", "2016 WHG Scheduler");
+                mail.From = new MailAddress("2016whgscheduler@gmail.com", "2018 WHG Scheduler");
                 foreach (string email in sponsor.email.Split(';'))
                 {
                     if (!string.IsNullOrEmpty(email.Trim()))
@@ -131,7 +131,7 @@ namespace WHGScheduler.Repository
                 mail.Subject = "Registration Confirmation";
 
                 //build out confirm email
-                string msgBody = "The following registrant is confirmed for an appointment at 2016 Global Conference, on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + ".";
+                string msgBody = "The following registrant is confirmed for an appointment at 2018 Global Conference, on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + ".";
 
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine(msgBody);

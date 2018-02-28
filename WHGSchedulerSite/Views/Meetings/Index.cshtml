@@ -14,8 +14,12 @@
                     <img class="media-object" src="~/assets/img/logos/@Model.sponsor.logoImage"> 
                 </a>
             </div>
-            <div class="media-body">
-            </div>
+            @if (!string.IsNullOrEmpty(Model.sponsor.description))
+            {
+                <div class="media-body">
+                    @Model.sponsor.description
+                </div>
+            }
         </div>
     </div>
 </div>
