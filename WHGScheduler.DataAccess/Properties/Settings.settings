@@ -5,18 +5,26 @@
     <Setting Name="WHGSchedulerConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=tckgvy6y8i.database.windows.net;Initial Catalog=WHGScheduler;User ID=WHGScheduler;Password=s@h3d0!er;Connect Timeout=60&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=tcp:whgscheduler.database.windows.net,1433;Persist Security Info=True;User ID=WHGScheduler;Password=s@h3d0!er;&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=tckgvy6y8i.database.windows.net;Initial Catalog=WHGScheduler;User ID=WHGScheduler;Password=s@h3d0!er;Connect Timeout=60</Value>
+      <Value Profile="(Default)">Data Source=tcp:whgscheduler.database.windows.net,1433;Persist Security Info=True;User ID=WHGScheduler;Password=s@h3d0!er;</Value>
     </Setting>
     <Setting Name="WHGSchedulerConnectionString1" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=tckgvy6y8i.database.windows.net;Initial Catalog=WHGScheduler;User ID=WHGScheduler;Connect Timeout=60&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=tcp:whgscheduler.database.windows.net,1433;User ID=WHGScheduler;&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=tckgvy6y8i.database.windows.net;Initial Catalog=WHGScheduler;User ID=WHGScheduler;Connect Timeout=60</Value>
+      <Value Profile="(Default)">Data Source=tcp:whgscheduler.database.windows.net,1433;User ID=WHGScheduler;</Value>
+    </Setting>
+    <Setting Name="WHGSchedulerConnectionString2" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=tcp:whgscheduler.database.windows.net,1433;Initial Catalog=WHGScheduler;Persist Security Info=True;User ID=WHGScheduler;Password=s@h3d0!er&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=tcp:whgscheduler.database.windows.net,1433;Initial Catalog=WHGScheduler;Persist Security Info=True;User ID=WHGScheduler;Password=s@h3d0!er</Value>
     </Setting>
   </Settings>
 </SettingsFile>

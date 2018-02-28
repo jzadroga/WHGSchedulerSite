@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -149,7 +150,9 @@
     <Content Include="assets\js\libs\moment-with-locales.min.js" />
     <Content Include="assets\js\libs\moment.min.js" />
     <Content Include="assets\js\libs\npm.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -185,6 +188,8 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\ControlPanel\Meetings.cshtml" />
     <Content Include="Views\ControlPanel\Registrants.cshtml" />
+    <None Include="Properties\PublishProfiles\2018WHGAppointmentScheduler - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\2018WHGAppointmentScheduler - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

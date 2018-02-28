@@ -54,7 +54,7 @@ namespace WHGScheduler.DataAccess
     #endregion
 		
 		public WHGSchedulerDBDataContext() : 
-				base(global::WHGScheduler.DataAccess.Properties.Settings.Default.WHGSchedulerConnectionString, mappingSource)
+				base(global::WHGScheduler.DataAccess.Properties.Settings.Default.WHGSchedulerConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -1687,11 +1687,13 @@ namespace WHGScheduler.DataAccess
 		
 		private System.DateTime _dateCreated;
 		
-		private System.DateTime _dateModified;
+		private System.Nullable<System.DateTime> _dateModified;
 		
 		private string _websiteUrl;
 		
 		private string _email;
+		
+		private string _type;
 		
 		private EntitySet<meeting> _meetings;
 		
@@ -1715,12 +1717,14 @@ namespace WHGScheduler.DataAccess
     partial void OnstatusIDChanged();
     partial void OndateCreatedChanging(System.DateTime value);
     partial void OndateCreatedChanged();
-    partial void OndateModifiedChanging(System.DateTime value);
+    partial void OndateModifiedChanging(System.Nullable<System.DateTime> value);
     partial void OndateModifiedChanged();
     partial void OnwebsiteUrlChanging(string value);
     partial void OnwebsiteUrlChanged();
     partial void OnemailChanging(string value);
     partial void OnemailChanged();
+    partial void OntypeChanging(string value);
+    partial void OntypeChanged();
     #endregion
 		
 		public sponsor()
@@ -1790,7 +1794,7 @@ namespace WHGScheduler.DataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(250)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(50)")]
 		public string title
 		{
 			get
@@ -1874,8 +1878,8 @@ namespace WHGScheduler.DataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateModified", DbType="DateTime NOT NULL")]
-		public System.DateTime dateModified
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateModified", DbType="DateTime")]
+		public System.Nullable<System.DateTime> dateModified
 		{
 			get
 			{
@@ -1914,7 +1918,7 @@ namespace WHGScheduler.DataAccess
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NVarChar(MAX)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NVarChar(250)")]
 		public string email
 		{
 			get
@@ -1930,6 +1934,26 @@ namespace WHGScheduler.DataAccess
 					this._email = value;
 					this.SendPropertyChanged("email");
 					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="NVarChar(250)")]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this.OntypeChanging(value);
+					this.SendPropertyChanging();
+					this._type = value;
+					this.SendPropertyChanged("type");
+					this.OntypeChanged();
 				}
 			}
 		}

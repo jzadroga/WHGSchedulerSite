@@ -14,15 +14,47 @@
     </div>
 </div>
 
-<div class="row">
-    @foreach (var sponsor in Model.sponsorList)
+<div class="row body-nav">
+    <div class="col-md-12">
+        <button id="btn-supplier-partners" class="btn btn-block btn-lg btn-primary large-nav" type="button" data-toggle="collapse" data-target="#supplier-partners">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>Platium and Gold Supplier Partners
+        </button>
+    </div>
+</div>
+
+<div class="row collapse" id="supplier-partners">
+    @foreach (var sponsor in Model.sponsorList.Where(s => s.type == "Supplier Partners"))
     {
         <div class="col-md-4">
             <div class="thumbnail">
                 <img src="~/assets/img/logos/@sponsor.logoImage" alt="...">
                 <div class="caption">
                     <p style="text-align: center">
-                        <a href="@Url.Action("Index", "Meetings", new {sponsor = @sponsor.id })" class="btn btn-primary" role="button">Meet</a>
+                        <a href="@Url.Action("Index", "Meetings", new {sponsor = @sponsor.id})" class="btn btn-primary" role="button">Meet</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="row body-nav">
+    <div class="col-md-12">
+        <button id="btn-global-village" class="btn btn-block btn-lg btn-info large-nav" type="button" data-toggle="collapse" data-target="#global-village">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>WHG Global Village
+        </button>
+    </div>
+</div>
+
+<div class="row collapse" id="global-village">
+    @foreach (var sponsor in Model.sponsorList.Where(s => s.type == "WHG Global Village"))
+    {
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="~/assets/img/logos/@sponsor.logoImage" alt="...">
+                <div class="caption">
+                    <p style="text-align: center">
+                        <a href="@Url.Action("Index", "Meetings", new {sponsor = @sponsor.id})" class="btn btn-primary" role="button">Meet</a>
                     </p>
                 </div>
             </div>

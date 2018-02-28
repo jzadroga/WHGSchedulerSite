@@ -1,5 +1,13 @@
 ﻿$(document).ready(function () {
 
+    $('#btn-supplier-partners').click(function () {
+        $(this).find('span').toggleClass('glyphicon-chevron-right').toggleClass('glyphicon-chevron-down');
+    });
+
+    $('#btn-global-village').click(function () {
+        $(this).find('span').toggleClass('glyphicon-chevron-right').toggleClass('glyphicon-chevron-down');
+    });
+
     $('#save-meeting-registrant').click(function () {
         var $registerFrm = $('#frmSaveRegistrant');
         

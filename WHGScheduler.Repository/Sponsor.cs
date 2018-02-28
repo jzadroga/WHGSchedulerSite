@@ -12,6 +12,7 @@ namespace WHGScheduler.Repository
     {
         public static List<SponsorModel> GetList(bool activeOnly)
         {
+
             var sponsorList = sponsor.GetList(activeOnly);
 
             return sponsorList.Select( sp => new SponsorModel()
@@ -21,7 +22,8 @@ namespace WHGScheduler.Repository
                 logoImage = sp.logoImage,
                 name = sp.name,
                 url = sp.websiteUrl,
-                email = sp.email
+                email = sp.email,
+                type = sp.type
             }).ToList();
         }
 
@@ -36,7 +38,8 @@ namespace WHGScheduler.Repository
                 logoImage = sponsorObj.logoImage,
                 name = sponsorObj.name,
                 url = sponsorObj.websiteUrl,
-                email = sponsorObj.email
+                email = sponsorObj.email,
+                type = sponsorObj.type
             };
         }
 
@@ -48,7 +51,8 @@ namespace WHGScheduler.Repository
                 logoImage = obj.logoImage,
                 websiteUrl = obj.url,
                 description = obj.description,
-                email = obj.email
+                email = obj.email,
+                type = obj.type
             });
         }
 

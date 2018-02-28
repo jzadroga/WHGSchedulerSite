@@ -48,6 +48,7 @@ namespace WHGScheduler.DataAccess
                     updateSponsor.logoImage = sponsorObj.logoImage;
                     updateSponsor.websiteUrl = sponsorObj.websiteUrl;
                     updateSponsor.description = sponsorObj.description;
+                    updateSponsor.type = sponsorObj.type;
                     updateSponsor.dateModified = DateTime.Now;
                 }
             }

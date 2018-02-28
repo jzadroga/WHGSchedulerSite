@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WHGScheduler" Class="WHGSchedulerDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=tckgvy6y8i.database.windows.net;Initial Catalog=WHGScheduler;User ID=WHGScheduler;Connect Timeout=60" SettingsObjectName="WHGScheduler.DataAccess.Properties.Settings" SettingsPropertyName="WHGSchedulerConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=tcp:whgscheduler.database.windows.net,1433;Initial Catalog=WHGScheduler;Persist Security Info=True;User ID=WHGScheduler" SettingsObjectName="WHGScheduler.DataAccess.Properties.Settings" SettingsPropertyName="WHGSchedulerConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.component" Member="components">
     <Type Name="component">
       <Column Name="componentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -77,13 +77,14 @@
       <Column Name="sponsorID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="logoImage" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="title" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="statusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="websiteUrl" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="email" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
       <Association Name="sponsor_meeting" Member="meetings" ThisKey="sponsorID" OtherKey="sponsorID" Type="meeting" />
       <Association Name="status_sponsor" Member="status" ThisKey="statusID" OtherKey="statusID" Type="status" IsForeignKey="true" />
     </Type>

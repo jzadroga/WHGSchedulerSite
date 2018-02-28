@@ -24,7 +24,8 @@
             logo: $(this).attr('data-logo'),
             url: $(this).attr('data-url'),
             description: $(this).attr('data-desc'),
-            email: $(this).attr('data-email')
+            email: $(this).attr('data-email'),
+            type: $(this).attr('data-type')
         };
 
         if (sponsor.id === '0') {
@@ -41,7 +42,7 @@
         $('#sponsorUrl').val(sponsor.url);
         $('#sponsorDescription').val(sponsor.description);
         $('#sponsorEmail').val(sponsor.email);
-
+        $('#sponsorType').val(sponsor.type);
         $('#mdl-sponsor').modal('show');
     });
 

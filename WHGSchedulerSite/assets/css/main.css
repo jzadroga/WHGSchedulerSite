@@ -30,3 +30,16 @@ div.content-background{
     margin-left: 0px;
     margin-right: 0px;
 }
+
+div.body-nav {
+    margin-bottom: 25px;
+}
+
+button.large-nav {
+    text-align: left;
+    font-size: 20px;
+}
+
+button.large-nav span {
+    margin-right: 15px;
+}
