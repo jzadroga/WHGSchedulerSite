@@ -16,7 +16,7 @@ namespace WHGScheduler.Repository
             return dailyMeetings.Select(smt => new SponsorMeetingsModel()
             {
                 day = smt.Day,
-                startDay = (smt.Day == 1) ? "September 13" : "September 14",
+                startDay = (smt.Day == 1) ? "Tuesday April 10" : "Wednesday April 11",
                 meetings = smt.Meetings.Select( mt => new MeetingModel()
                 {
                    id = mt.meetingID,

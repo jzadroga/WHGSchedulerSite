@@ -83,7 +83,7 @@ namespace WHGScheduler.Repository
 
                 //build out confirm email
                 string msgBody = "Thank you for scheduling an appointment at 2018 Global Conference.  Your meeting time on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + " with " + meeting.sponserName + " is confirmed. Your meeting will take place on the Trade Show floor in the sponsor’s booth in Bayside CD at the Mandalay Bay Convention Center.  To modify or cancel your appointment, please contact Bert Guy, bert@onyxmeetings.com.";
-                string msgLink = "For more conference information, please visit http://www.2016whgglobalconference.com/";
+                string msgLink = "For more conference information, please visit http://www.2018whgglobalconference.com/. This email message (including all attachments) is for the sole use of the intended recipient(s) and may contain confidential information. If you are not the intended recipient, please contact the sender by reply email and destroy all copies of the original message. Unless otherwise indicated in the body of this email, nothing in this communication is intended to operate as an electronic signature and this transmission cannot be used to form, document, or authenticate a contract. Wyndham Worldwide Corporation and/or its affiliates may monitor all incoming and outgoing email communications in the United States, including the content of emails and attachments, for security, legal compliance, training, quality assurance and other purposes.";
 
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine(msgBody);
@@ -131,9 +131,11 @@ namespace WHGScheduler.Repository
                 mail.Subject = "Registration Confirmation";
 
                 //build out confirm email
-                string msgBody = "The following registrant is confirmed for an appointment at 2018 Global Conference, on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + ".";
+                string msgBody = "The following attendee is confirmed for an appointment with you on " + meeting.startDate.ToString("dddd, MMMM dd") + " from " + meeting.timeLabel + ".";
 
                 StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Greetings,");
+                sb.AppendLine();     
                 sb.AppendLine(msgBody);
                 sb.AppendLine();
                 sb.AppendLine("First Name: " + registrant.firstname);
