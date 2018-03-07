@@ -7,7 +7,7 @@ h1.title{
     margin-bottom: 20px;
 }
 
-p.instructions{
+p.instructions, ol.instructions{
     font-size: 18px;
 }
 

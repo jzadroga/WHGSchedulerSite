@@ -67,7 +67,7 @@ namespace WHGScheduler.Repository
 
                 mail.From = new MailAddress("2016whgscheduler@gmail.com", "2018 WHG Scheduler");
                 mail.To.Add(new MailAddress(registrant.email));
-                mail.CC.Add(new MailAddress("bert@onyxmeetings.com"));
+               // mail.CC.Add(new MailAddress("bert@onyxmeetings.com"));
 
                 SmtpClient client = new SmtpClient
                 {
@@ -82,13 +82,24 @@ namespace WHGScheduler.Repository
                 mail.Subject = "Registration Confirmation";
 
                 //build out confirm email
-                string msgBody = "Thank you for scheduling an appointment at 2018 Global Conference.  Your meeting time on " + meeting.startDate.ToShortDateString() + " at " + meeting.timeLabel + " with " + meeting.sponserName + " is confirmed. Your meeting will take place on the Trade Show floor in the sponsor’s booth in Bayside CD at the Mandalay Bay Convention Center.  To modify or cancel your appointment, please contact Bert Guy, bert@onyxmeetings.com.";
-                string msgLink = "For more conference information, please visit http://www.2018whgglobalconference.com/. This email message (including all attachments) is for the sole use of the intended recipient(s) and may contain confidential information. If you are not the intended recipient, please contact the sender by reply email and destroy all copies of the original message. Unless otherwise indicated in the body of this email, nothing in this communication is intended to operate as an electronic signature and this transmission cannot be used to form, document, or authenticate a contract. Wyndham Worldwide Corporation and/or its affiliates may monitor all incoming and outgoing email communications in the United States, including the content of emails and attachments, for security, legal compliance, training, quality assurance and other purposes.";
-
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine(msgBody);
+                sb.AppendLine("Thank you for scheduling an appointment!");
                 sb.AppendLine();
-                sb.AppendLine(msgLink);
+                sb.AppendLine("Your meeting is confirmed for:");
+                sb.AppendLine();
+                sb.AppendLine(meeting.sponserName);
+                sb.AppendLine();
+                sb.AppendLine("Date: " + meeting.startDate.ToString("dddd, MMMM dd"));
+                sb.AppendLine("Time: " + meeting.timeLabel);
+                sb.AppendLine("Location:");
+                sb.AppendLine("Supplier Partners: Appointments with supplier partners will take place in that supplier’s booth in Bayside CD at the Mandalay Bay Convention Center. Please refer to the Trade Show Floor Plan for a complete listing of booth numbers.");
+                sb.AppendLine();
+                sb.AppendLine("Global Village: Appointments with Global Village team members will take place at the Appointment Center in Booth #118 in Bayside CD at the Mandalay Bay Convention Center. Please refer to the Trade Show Floor Plan for the exact location. Please also check in at the Appointment Center Concierge Desk when you arrive and a team member will assist you in finding your meeting contact.");
+                sb.AppendLine();
+                sb.AppendLine("To modify or cancel your appointment, please contact Bert Guy, bert@onyxmeetings.com.");
+                sb.AppendLine();
+                sb.AppendLine("For more conference information, please visit http://www.2018whgglobalconference.com/");
+                sb.AppendLine();
                 mail.Body = sb.ToString();  
 
                 client.Send(mail);
